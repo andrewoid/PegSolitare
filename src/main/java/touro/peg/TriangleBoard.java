@@ -1,5 +1,7 @@
 package touro.peg;
 
+import java.util.Arrays;
+
 public class TriangleBoard {
 
     private boolean[] pegs = new boolean[15];
@@ -15,16 +17,20 @@ public class TriangleBoard {
         return pegs[index];
     }
 
-    private void printBoard() {
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < pegs.length; i++)
         {
             for (int j = 0; j < i; j++)
             {
-                System.out.print(pegs[i]);
+                output.append(pegs[i]);
             }
-            System.out.println();
+            output.append("\n");
         }
+        return output.toString();
     }
+
 
     public boolean[] getPegs() {
         return pegs;
