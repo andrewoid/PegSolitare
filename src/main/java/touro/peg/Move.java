@@ -1,21 +1,25 @@
 package touro.peg;
 
 public class Move {
-
-    boolean canMove() {
-
+    private int indexFrom;
+    private int indexRemove;
+    private int indexTo;
+    public Move(int indexFrom, int indexRemove, int indexTo){
+        this.indexFrom = indexFrom;
+        this.indexRemove = indexRemove;
+        this.indexTo = indexTo;
     }
 
-    void makeMove() {
-
+    public int getIndexFrom() {
+        return indexFrom;
     }
 
-    public boolean comparesTo(Move otherMove){
-        if(this.indexRemove == otherMove.getIndexRemove()){
-            return (this.indexTo == otherMove.getIndexTo() && this.indexFrom == otherMove.getIndexFrom())
-                    || (this.indexFrom == otherMove.getIndexTo() && this.indexTo == otherMove.getIndexFrom());
-        }
-        return false;
+    public int getIndexRemove() {
+        return indexRemove;
+    }
+
+    public int getIndexTo() {
+        return indexTo;
     }
 
 }
