@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Play {
-    private TriangleBoard board;
     private List<Move> movesList = new ArrayList<>();
     private List<Move> legalMoves = new ArrayList<>();
 
@@ -14,9 +13,9 @@ public class Play {
 
     public void move(TriangleBoard board, Move move) {
         if(isValidMove(board, move)){
-            board.setPeg(false, move.getIndexFrom());
-            board.setPeg(false, move.getIndexRemove());
-            board.setPeg(true, move.getIndexTo());
+            board.setPeg(move.getIndexFrom(), false);
+            board.setPeg(move.getIndexRemove(), false);
+            board.setPeg(move.getIndexTo(), true);
 
             movesList.add(move);
         }
@@ -35,8 +34,8 @@ public class Play {
         return false;
     }
 
-    private static boolean isPossible(TriangleBoard board, Move move) {
-        return board.getPegs()[move.getIndexFrom()] && !board.getPegs()[move.getIndexTo()] && board.getPegs()[move.getIndexRemove()];
+    private boolean isPossible(TriangleBoard board, Move move) {
+        return board.getPegs()[move.getIndexFrom()] && board.getPegs()[move.getIndexRemove()] && !board.getPegs()[move.getIndexTo()];
     }
 
     private void populateLegalMoves() {

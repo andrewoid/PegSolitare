@@ -5,16 +5,7 @@ public class TriangleBoard {
     public boolean[] getPegs() {
         return pegs;
     }
-    public void setPeg(boolean pegStatus, int pegIndex) {
+    public void setPeg(int pegIndex, boolean pegStatus) {
         pegs[pegIndex] = pegStatus;
     }
-
-    public void move(int indexFrom, int indexRemove, int indexTo) {
-
-    }
-
-    public boolean canMove(int indexFrom, int indexRemove, int indexTo) {
-
-    }
-
 }
