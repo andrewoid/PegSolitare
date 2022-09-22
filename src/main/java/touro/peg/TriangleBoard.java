@@ -15,25 +15,22 @@ public class TriangleBoard {
         return pegs[index];
     }
 
-    private int sPeg(int index) {
+    private int intPeg(int index) {
         return pegs[index] ? 1 : 0;
     }
 
     @Override
     public String toString() {
-        String output = String.format("""
+        return String.format("""
                             %d
                            %d %d
                           %d %d %d
                          %d %d %d %d
                         %d %d %d %d %d""",
-                sPeg(0), sPeg(1), sPeg(2), sPeg(3),
-                sPeg(4), sPeg(5), sPeg(6), sPeg(7),
-                sPeg(8), sPeg(9), sPeg(10), sPeg(11),
-                sPeg(12), sPeg(13), sPeg(14));
-
-
-        return output;
+                intPeg(0), intPeg(1), intPeg(2), intPeg(3),
+                intPeg(4), intPeg(5), intPeg(6), intPeg(7),
+                intPeg(8), intPeg(9), intPeg(10), intPeg(11),
+                intPeg(12), intPeg(13), intPeg(14));
     }
 
 
