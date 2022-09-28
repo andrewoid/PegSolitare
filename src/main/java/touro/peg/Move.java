@@ -22,4 +22,12 @@ public class Move {
         return indexTo;
     }
 
+    @Override
+    public boolean equals(Object otherMove) {
+        if (this == otherMove) return true;
+        if (otherMove == null || getClass() != otherMove.getClass()) return false;
+        Move move = (Move) otherMove;
+        return indexFrom == move.indexFrom && indexRemove == move.indexRemove && indexTo == move.indexTo;
+    }
+    
 }
