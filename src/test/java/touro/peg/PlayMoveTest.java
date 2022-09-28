@@ -7,17 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayMoveTest {
 
-    TriangleBoard board = new TriangleBoard();
+    TriangleBoard board = new TriangleBoard(0);
     PlayMove play = new PlayMove(board);
-
-
-    //remove once TriangleBoard code is merged
-    @BeforeEach
-    void beforeEachTest(){
-        for (int i = 0; i < 15; i++) {
-            board.setPeg(i, i != 0);
-        }
-    }
 
     @Test
     void move_isValid() {

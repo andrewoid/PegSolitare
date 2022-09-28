@@ -1,7 +1,5 @@
 package touro.peg;
 
-import java.util.Objects;
-
 public class Move {
     private int indexFrom;
     private int indexRemove;
