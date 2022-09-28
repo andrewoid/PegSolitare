@@ -1,15 +1,15 @@
 package touro.peg;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PlayTest {
+class PlayMoveTest {
 
-    Play play = new Play();
     TriangleBoard board = new TriangleBoard();
+    PlayMove play = new PlayMove(board);
+
 
     //remove once TriangleBoard code is merged
     @BeforeEach
@@ -24,7 +24,7 @@ class PlayTest {
         //given
 
         //when
-        play.move(board, new Move(3,1,0));
+        play.move(new Move(3,1,0));
 
         //then
         assertTrue(board.getPegs()[0]);
@@ -37,7 +37,7 @@ class PlayTest {
         //given
 
         //when
-        play.move(board, new Move(4,1,0));
+        play.move(new Move(4,1,0));
 
         //then
         assertFalse(board.getPegs()[0]);
@@ -56,8 +56,8 @@ class PlayTest {
         Move invalidMove = new Move(3,1,0);
 
         //when
-        boolean valid = play.isValidMove(board, validMove);
-        boolean invalid = play.isValidMove(board, invalidMove);
+        boolean valid = play.isValidMove(validMove);
+        boolean invalid = play.isValidMove(invalidMove);
 
         //then
         assertTrue(valid);
@@ -72,9 +72,9 @@ class PlayTest {
         Move invalidMove2 = new Move(0,1,3);
 
         //when
-        boolean valid = play.isValidMove(board, validMove);
-        boolean invalid = play.isValidMove(board, invalidMove);
-        boolean invalid2 = play.isValidMove(board, invalidMove2);
+        boolean valid = play.isValidMove(validMove);
+        boolean invalid = play.isValidMove(invalidMove);
+        boolean invalid2 = play.isValidMove(invalidMove2);
 
         //then
         assertTrue(valid);
