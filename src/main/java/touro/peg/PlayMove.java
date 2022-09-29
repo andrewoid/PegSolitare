@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayMove {
-    private TriangleBoard board;
+    private final TriangleBoard board;
 
     public List<Move> getLegalMoves() {
         return legalMoves;

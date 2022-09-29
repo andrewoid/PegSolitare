@@ -11,17 +11,15 @@ public class TriangleBoardTree {
     public static void main(String[] args) {
         TriangleBoardTree triangleBoardTree = new TriangleBoardTree(0);
         triangleBoardTree.appendChildren(triangleBoardTree.rootNode, triangleBoardTree.board);
-//        int counter = 0;
-//        for (TriangleBoard board: triangleBoardTree.finalCopyBoards) {
-//            if (counter < 50){
-//            System.out.println(board + "\n\n");
-//            counter ++;
-//            }
-//            else{
-//                break;
-//            }
-//        }
-    }
+
+        //just print solution boards
+        int counter = 0;
+        for (TriangleBoard board: triangleBoardTree.finalCopyBoards) {
+            System.out.println(board + "\n\n");
+            counter++;
+            }
+        System.out.println(counter);
+        }
 
     private TriangleTreeNode rootNode;
     private TriangleBoard board;
@@ -45,7 +43,7 @@ public class TriangleBoardTree {
         public String toString() {
             return "TriangleTreeNode{" +
                     "triangleBoard= \n" + triangleBoard +
-                    ", children=" + children.size(); //+ children;
+                    ", children=" + children;
         }
     }
 
@@ -68,7 +66,14 @@ public class TriangleBoardTree {
                 appendChildren(newTriangleTreeNode, copyBoard);
             }
         }
-        finalCopyBoards.add(finalCopyBoard);
+        int counter = 0;
+        for(boolean peg : finalCopyBoard.getPegs()){
+            if(peg){
+                counter++;
+            }
+        }
+        if(counter == 1){
+        finalCopyBoards.add(finalCopyBoard);}
     }
 
     private List<TriangleTreeNode> getLeaves(){
@@ -87,16 +92,4 @@ public class TriangleBoardTree {
             }
 
     }
-//    void printChildren(TriangleTreeNode parent){
-//        System.out.println(parent);
-//        while(parent.children != null){
-//            for(TriangleTreeNode child : parent.children){
-//                System.out.println(child);
-//                printChildren(child);
-//            }
-//        }
-//    }
-
-    //to find solution - traverse through the tree
-
 }
