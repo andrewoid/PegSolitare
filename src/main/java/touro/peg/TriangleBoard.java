@@ -3,17 +3,28 @@ package touro.peg;
 public class TriangleBoard {
     private boolean[] pegs = new boolean[15];
 
+    private PlayMove playMove;
+
     public TriangleBoard(int startingIndex) {
+        this.playMove = new PlayMove(this);
         for (int i = 0; i < pegs.length; i++)
         {
             pegs[i] = i != startingIndex;
         }
     }
+    public TriangleBoard(boolean[] pegs){
+        this.playMove = new PlayMove(this);
+        System.arraycopy(pegs, 0, this.pegs, 0, pegs.length);
+    }
+
     public boolean[] getPegs() {
         return pegs;
     }
     public void setPeg(int pegIndex, boolean pegStatus) {
         pegs[pegIndex] = pegStatus;
+    }
+    public PlayMove getPlayMove() {
+        return playMove;
     }
     public boolean hasPeg(int index) {
         return pegs[index];
@@ -36,4 +47,6 @@ public class TriangleBoard {
                 intPeg(8), intPeg(9), intPeg(10), intPeg(11),
                 intPeg(12), intPeg(13), intPeg(14));
     }
+
+
 }
