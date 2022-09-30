@@ -40,12 +40,15 @@ public class TriangleBoard {
     }
 
     public boolean isWin(){
-        int sum = 0;
-        for (int i = 0; i < pegs.length; i++)
+        int numTrues = 0;
+
+        for (boolean peg : pegs)
         {
-            sum+=intPeg(i);
+            if (peg) {
+                numTrues++;
+            }
         }
-        return sum == 1;
+        return numTrues==1;
     }
     public boolean isBestWin(){
         return isWin() && pegs[startingIndex];
