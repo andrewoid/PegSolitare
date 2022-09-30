@@ -2,8 +2,10 @@ package touro.peg;
 
 public class TriangleBoard {
     private boolean[] pegs = new boolean[15];
+    private final int startingIndex;
 
     public TriangleBoard(int startingIndex) {
+        this.startingIndex = startingIndex;
         for (int i = 0; i < pegs.length; i++)
         {
             pegs[i] = i != startingIndex;
@@ -36,4 +38,17 @@ public class TriangleBoard {
                 intPeg(8), intPeg(9), intPeg(10), intPeg(11),
                 intPeg(12), intPeg(13), intPeg(14));
     }
+
+    public boolean isWin(){
+        int sum = 0;
+        for (int i = 0; i < pegs.length; i++)
+        {
+            sum+=intPeg(i);
+        }
+        return sum == 1;
+    }
+    public boolean isBestWin(){
+        return isWin() && pegs[startingIndex];
+    }
+
 }
