@@ -29,4 +29,44 @@ class TriangleBoardTest {
                 1 1 1 1 1""";
         assertEquals(expected, board.toString());
     }
+
+    @Test
+    public void isWin(){
+        //Given
+        //When
+        TriangleBoard board = new TriangleBoard(0);
+        for (int i = 2; i < 15; i++)
+        {
+            board.setPeg(i, false);
+        }
+        //Then
+        String expected = """
+                    0
+                   1 0
+                  0 0 0
+                 0 0 0 0
+                0 0 0 0 0""";
+        assertEquals(expected, board.toString());
+    }
+
+    @Test
+    public void isBestWin(){
+        //Given
+        //When
+        TriangleBoard board = new TriangleBoard(0);
+        board.setPeg(0, true);
+        for (int i = 1; i < 15; i++)
+        {
+            board.setPeg(i, false);
+        }
+        //Then
+        String expected = """
+                    1
+                   0 0
+                  0 0 0
+                 0 0 0 0
+                0 0 0 0 0""";
+        assertEquals(expected, board.toString());
+    }
+
 }
