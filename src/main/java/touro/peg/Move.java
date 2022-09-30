@@ -29,5 +29,13 @@ public class Move {
         Move move = (Move) otherMove;
         return indexFrom == move.indexFrom && indexRemove == move.indexRemove && indexTo == move.indexTo;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Move{" +
+                "indexFrom=" + indexFrom +
+                ", indexRemove=" + indexRemove +
+                ", indexTo=" + indexTo +
+                "}\n";
+    }
 }
