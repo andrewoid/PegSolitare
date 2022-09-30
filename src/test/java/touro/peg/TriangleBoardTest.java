@@ -40,13 +40,8 @@ class TriangleBoardTest {
             board.setPeg(i, false);
         }
         //Then
-        String expected = """
-                    0
-                   1 0
-                  0 0 0
-                 0 0 0 0
-                0 0 0 0 0""";
-        assertEquals(expected, board.toString());
+
+        assertTrue(board.isWin());
     }
 
     @Test
@@ -60,13 +55,7 @@ class TriangleBoardTest {
             board.setPeg(i, false);
         }
         //Then
-        String expected = """
-                    1
-                   0 0
-                  0 0 0
-                 0 0 0 0
-                0 0 0 0 0""";
-        assertEquals(expected, board.toString());
+        assertTrue(board.isBestWin());
     }
 
 }
