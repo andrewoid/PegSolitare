@@ -8,11 +8,20 @@ import java.util.List;
 
 
 public class TriangleBoardTree {
-    private TriangleTreeNode rootNode;
+    public static void main(String[] args) {
+        TriangleBoard triangleBoard = new TriangleBoard(0);
+        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
+        triangleBoardTree.createTreeAndStoreLeaves(triangleBoardTree.rootNode, triangleBoard);
+
+        System.out.println(triangleBoardTree.getSequenceToLeaf(triangleBoardTree.getLeaves().get(0)));
+        System.out.println(triangleBoardTree.getLeaves().get(0));
+
+    }
     private TriangleBoard board;
+    private TriangleTreeNode rootNode;
     private List<TriangleTreeNode> leaves;
 
-    private class TriangleTreeNode {
+    class TriangleTreeNode {
         private TriangleBoard triangleBoard;
         private TriangleTreeNode parent;
         private Move move;
@@ -33,21 +42,15 @@ public class TriangleBoardTree {
                     '}' + "\n-------------------------\n";
         }
     }
-    public TriangleBoardTree(int startingIndex) {
-       /* should this parameter be reserved for TriangleBoardTrees class?
-        instead, take board as a parameter so that you can create a tree from any board(in any state)
-        */
-        this.board = new TriangleBoard(startingIndex);
+    public TriangleBoardTree(TriangleBoard board) {
+        this.board = board;
         this.rootNode = new TriangleTreeNode(board, null, null, new ArrayList<>());
         this.leaves = new ArrayList<>();
     }
 
+    public TriangleBoard getBoard(){ return board; }
     public TriangleTreeNode getRootNode() {
         return rootNode;
-    }
-
-    public TriangleBoard getBoard() {
-        return board;
     }
 
     public List<TriangleTreeNode> getLeaves() {
@@ -66,10 +69,9 @@ public class TriangleBoardTree {
             }
         }
         leaves.add(node);
-        //if(isWin()){winningLeaves.add(node)}
     }
 
-    public List<TriangleTreeNode> getMovesToLeaf(TriangleTreeNode leaf){
+    public List<TriangleTreeNode> getSequenceToLeaf(TriangleTreeNode leaf){
         TriangleTreeNode node = leaf;
         List<TriangleTreeNode> listOfMovesToLeaf = new ArrayList<>();
         listOfMovesToLeaf.add(node);
