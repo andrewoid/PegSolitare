@@ -6,12 +6,16 @@ import touro.peg.TriangleBoard;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TriangleBoardTreeTest {
-    TriangleBoard triangleBoard = new TriangleBoard(0);
-    TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
-
     @Test
-    void createTreeAndStoreLeaves(){
+    void constructor(){
+        //given
+        TriangleBoard triangleBoard = new TriangleBoard(0);
 
+        //when
+        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
+
+        //then
+        // check if 1st index in getLeaves() list's board == expected board
     }
 
 }
