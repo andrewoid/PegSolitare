@@ -38,7 +38,7 @@ public class TriangleBoardTree {
         instead, take board as a parameter so that you can create a tree from any board(in any state)
         */
         this.board = new TriangleBoard(startingIndex);
-        this.rootNode = new TriangleTreeNode(board, null,null, new ArrayList<>());
+        this.rootNode = new TriangleTreeNode(board, null, null, new ArrayList<>());
         this.leaves = new ArrayList<>();
     }
 
@@ -66,6 +66,7 @@ public class TriangleBoardTree {
             }
         }
         leaves.add(node);
+        //if(isWin()){winningLeaves.add(node)}
     }
 
     public List<TriangleTreeNode> getMovesToLeaf(TriangleTreeNode leaf){
