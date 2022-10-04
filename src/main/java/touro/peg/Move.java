@@ -4,7 +4,8 @@ public class Move {
     private int indexFrom;
     private int indexRemove;
     private int indexTo;
-    public Move(int indexFrom, int indexRemove, int indexTo){
+
+    public Move(int indexFrom, int indexRemove, int indexTo) {
         this.indexFrom = indexFrom;
         this.indexRemove = indexRemove;
         this.indexTo = indexTo;
@@ -32,10 +33,9 @@ public class Move {
 
     @Override
     public String toString() {
-        return "Move{" +
-                "indexFrom=" + indexFrom +
-                ", indexRemove=" + indexRemove +
-                ", indexTo=" + indexTo +
-                "}\n";
+        return "Move =" +
+                " index from:" + indexFrom +
+                " index remove:" + indexRemove +
+                " index to:" + indexTo;
     }
 }

@@ -11,14 +11,11 @@ public class TriangleBoardTree {
     public static void main(String[] args) {
         TriangleBoard triangleBoard = new TriangleBoard(0);
         TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
-        triangleBoardTree.createTreeAndStoreLeaves(triangleBoardTree.rootNode, triangleBoard);
 
         System.out.println(triangleBoardTree.getSequenceToLeaf(triangleBoardTree.getLeaves().get(0)));
         System.out.println(triangleBoardTree.getLeaves().get(0));
 
     }
-    private TriangleBoard board;
-    private TriangleTreeNode rootNode;
     private List<TriangleTreeNode> leaves;
 
     class TriangleTreeNode {
@@ -36,29 +33,22 @@ public class TriangleBoardTree {
 
         @Override
         public String toString() {
-            return "TriangleTreeNode{" +
-                    "triangleBoard=\n" + triangleBoard +
-                    ", move=" + move +
-                    '}' + "\n-------------------------\n";
+            return "\n" + triangleBoard +
+                    "\n" + ((move == null) ? "No move" : move) +
+                    "\nsize of children=" + children.size() + "\n";
         }
     }
     public TriangleBoardTree(TriangleBoard board) {
-        this.board = board;
-        this.rootNode = new TriangleTreeNode(board, null, null, new ArrayList<>());
+        TriangleTreeNode rootNode = new TriangleTreeNode(board, null, null, new ArrayList<>());
         this.leaves = new ArrayList<>();
-    }
 
-    public TriangleBoard getBoard(){ return board; }
-    public TriangleTreeNode getRootNode() {
-        return rootNode;
+        createTreeAndStoreLeaves(rootNode, board);
     }
 
     public List<TriangleTreeNode> getLeaves() {
         return leaves;
     }
-
-    //should this be limited to running only once? or make private and wrap method where list will be cleared
-    public void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board) {
+    private void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board) {
         for (Move legalMove : board.getPlayMove().getLegalMoves()) {
             if (board.getPlayMove().isValidMove(legalMove)) {
                 TriangleBoard copyBoard = new TriangleBoard(board.getPegs());
@@ -82,13 +72,6 @@ public class TriangleBoardTree {
         return listOfMovesToLeaf;
 
     }
-
-    /* public ArrayList<Node> getChildrenForSpecificBoard(Board board)
-    {
-         loop through board
-         create a node that matches this board
-         return all its kids
-    }*/
 }
 
 
