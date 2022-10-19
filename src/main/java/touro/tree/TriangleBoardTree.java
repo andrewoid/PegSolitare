@@ -9,19 +9,20 @@ import java.util.List;
 
 public class TriangleBoardTree {
     /*
-    * A tree is created with a given board in any state.
-    * A root node is created with the given board only.
-    * For every possible next move, a child of the current node is created containing
-    *   1. the current state of the board,
-    *   2. it's parent,
-    *   3. and move
-    * The child is added to the parent node's list of children.
-    *
-    * This is called recursively until no other moves can be made.
-    * TODO: or until it is determined that no solution will be found for the current state of the board
-    *
-    * When there are no more possible moves, the current node is added to the leaves list. A leaf's board with
-    * one peg is a winning board
+     * A tree is created with a given board in any state.
+     * A root node is created with the given board only.
+     * For every possible next move, a child of the current node is created containing
+     *   1. the current state of the board,
+     *   2. it's parent,
+     *   3. and move
+     * The child is added to the parent node's list of children.
+     *
+     * This is called recursively until no other moves can be made.
+     * TODO: or until it is determined that no solution will be
+     *  found for the current state of the board
+     *
+     * When there are no more possible moves, the current node is added to the leaves list.
+     * A leaf's board with one peg is a winning board
      */
     private List<TriangleTreeNode> leaves;
 
@@ -63,7 +64,8 @@ public class TriangleBoardTree {
             if (board.getPlayMove().isValidMove(legalMove)) {
                 TriangleBoard copyBoard = new TriangleBoard(board.getPegs());
                 copyBoard.getPlayMove().move(legalMove);
-                TriangleTreeNode newTriangleTreeNode = new TriangleTreeNode(copyBoard, node, legalMove);
+                TriangleTreeNode newTriangleTreeNode
+                        = new TriangleTreeNode(copyBoard, node, legalMove);
                 node.children.add(newTriangleTreeNode);
                 createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
             }
@@ -73,7 +75,8 @@ public class TriangleBoardTree {
         }
     }
 
-    /*  Given a TriangleTreeNode, this method returns a List of TriangleTreeNodes that resulted in the given node */
+    /*  Given a TriangleTreeNode,
+        this method returns a List of TriangleTreeNodes that resulted in the given node */
     public List<TriangleTreeNode> getSequenceToNode(TriangleTreeNode treeNode) {
         TriangleTreeNode node = treeNode;
         List<TriangleTreeNode> listOfMovesToNode = new ArrayList<>();
