@@ -31,7 +31,7 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isWin(){
+    public void isWin() {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         for (int i = 2; i < 15; i++)
@@ -44,7 +44,7 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isBestWin(){
+    public void isBestWin() {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         board.setPeg(0, true);
@@ -58,7 +58,7 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isFalseWin(){
+    public void isFalseWin() {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         for (int i = 2; i < 15; i++)
@@ -71,7 +71,7 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isFalseBestWin(){
+    public void isFalseBestWin() {
         //Given
         TriangleBoard board = new TriangleBoard(1);
         board.setPeg(0, true);
