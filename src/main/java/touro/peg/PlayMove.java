@@ -6,15 +6,14 @@ import java.util.List;
 public class PlayMove {
     private final TriangleBoard board;
 
-    public List<Move> getLegalMoves() {
-        return legalMoves;
-    }
-
-    private List<Move> legalMoves = new ArrayList<>();
-
     public PlayMove(TriangleBoard board){
         populateLegalMoves();
         this.board = board;
+    }
+
+    private List<Move> legalMoves = new ArrayList<>();
+    public List<Move> getLegalMoves() {
+        return legalMoves;
     }
 
     public void move(Move move) {
