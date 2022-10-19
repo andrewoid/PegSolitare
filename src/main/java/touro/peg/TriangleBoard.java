@@ -11,12 +11,15 @@ public class TriangleBoard {
             pegs[i] = i != startingIndex;
         }
     }
+
     public boolean[] getPegs() {
         return pegs;
     }
+
     public void setPeg(int pegIndex, boolean pegStatus) {
         pegs[pegIndex] = pegStatus;
     }
+
     public boolean hasPeg(int index) {
         return pegs[index];
     }
@@ -39,7 +42,7 @@ public class TriangleBoard {
                 intPeg(12), intPeg(13), intPeg(14));
     }
 
-    public boolean isWin(){
+    public boolean isWin() {
         int numTrues = 0;
 
         for (boolean peg : pegs)
@@ -48,9 +51,10 @@ public class TriangleBoard {
                 numTrues++;
             }
         }
-        return numTrues==1;
+        return numTrues == 1;
     }
-    public boolean isBestWin(){
+
+    public boolean isBestWin() {
         return isWin() && pegs[startingIndex];
     }
 
