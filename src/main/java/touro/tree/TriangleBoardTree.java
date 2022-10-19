@@ -8,11 +8,22 @@ import java.util.List;
 
 
 public class TriangleBoardTree {
+    /*
+    * A tree is created with a given board in any state. A root node is created with the given board only.
+    * For every possible next move, a child of the current node is created containing the current state of the board,
+    * it's parent, and move. The child is added to the parent node's list of children.
+    *
+    * This is called recursively until no other moves can be made.
+    * TODO: or until it is determined that no solution will be found for the current state of the board
+    *
+    * When there are no more possible moves, the current node is added to the leaves list. A leaf's board with
+    * one peg is a winning board
+     */
     public static void main(String[] args) {
         TriangleBoard triangleBoard = new TriangleBoard(0);
         TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
 
-        System.out.println(triangleBoardTree.getSequenceToLeaf(triangleBoardTree.getLeaves().get(0)));
+        System.out.println(triangleBoardTree.getSequenceToNode(triangleBoardTree.getLeaves().get(0)));
         System.out.println(triangleBoardTree.getLeaves().get(0));
 
     }
@@ -61,15 +72,16 @@ public class TriangleBoardTree {
         leaves.add(node);
     }
 
-    public List<TriangleTreeNode> getSequenceToLeaf(TriangleTreeNode leaf){
-        TriangleTreeNode node = leaf;
-        List<TriangleTreeNode> listOfMovesToLeaf = new ArrayList<>();
-        listOfMovesToLeaf.add(node);
+    /*  Given a TriangleTreeNode, this method returns a List of TriangleTreeNodes that resulted in the given node */
+    public List<TriangleTreeNode> getSequenceToNode(TriangleTreeNode treeNode){
+        TriangleTreeNode node = treeNode;
+        List<TriangleTreeNode> listOfMovesToNode = new ArrayList<>();
+        listOfMovesToNode.add(node);
         while(node.parent != null){
             node = node.parent;
-            listOfMovesToLeaf.add(0,node);
+            listOfMovesToNode.add(0,node);
         }
-        return listOfMovesToLeaf;
+        return listOfMovesToNode;
 
     }
 }
