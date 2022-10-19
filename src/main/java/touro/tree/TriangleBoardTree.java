@@ -19,18 +19,10 @@ public class TriangleBoardTree {
     * When there are no more possible moves, the current node is added to the leaves list. A leaf's board with
     * one peg is a winning board
      */
-    public static void main(String[] args) {
-        TriangleBoard triangleBoard = new TriangleBoard(0);
-        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
-
-        System.out.println(triangleBoardTree.getSequenceToNode(triangleBoardTree.getLeaves().get(0)));
-        System.out.println(triangleBoardTree.getLeaves().get(0));
-
-    }
     private List<TriangleTreeNode> leaves;
 
     class TriangleTreeNode {
-        private TriangleBoard triangleBoard;
+        TriangleBoard triangleBoard;
         private TriangleTreeNode parent;
         private Move move;
         private List<TriangleTreeNode> children;
@@ -69,7 +61,8 @@ public class TriangleBoardTree {
                 createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
             }
         }
-        leaves.add(node);
+        if(node.children.size() == 0)
+            leaves.add(node);
     }
 
     /*  Given a TriangleTreeNode, this method returns a List of TriangleTreeNodes that resulted in the given node */
