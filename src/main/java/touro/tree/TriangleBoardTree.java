@@ -24,11 +24,11 @@ public class TriangleBoardTree {
         private Move move;
         private List<TriangleTreeNode> children;
 
-        public TriangleTreeNode(TriangleBoard triangleBoard, TriangleTreeNode parent, Move move, List<TriangleTreeNode> children) {
+        public TriangleTreeNode(TriangleBoard triangleBoard, TriangleTreeNode parent, Move move) {
             this.triangleBoard = triangleBoard;
             this.parent = parent;
             this.move = move;
-            this.children = children;
+            this.children = new ArrayList<>();
         }
 
         @Override
@@ -39,7 +39,7 @@ public class TriangleBoardTree {
         }
     }
     public TriangleBoardTree(TriangleBoard board) {
-        TriangleTreeNode rootNode = new TriangleTreeNode(board, null, null, new ArrayList<>());
+        TriangleTreeNode rootNode = new TriangleTreeNode(board, null, null);
         this.leaves = new ArrayList<>();
 
         createTreeAndStoreLeaves(rootNode, board);
@@ -53,7 +53,7 @@ public class TriangleBoardTree {
             if (board.getPlayMove().isValidMove(legalMove)) {
                 TriangleBoard copyBoard = new TriangleBoard(board.getPegs());
                 copyBoard.getPlayMove().move(legalMove);
-                TriangleTreeNode newTriangleTreeNode = new TriangleTreeNode(copyBoard, node, legalMove, new ArrayList<>());
+                TriangleTreeNode newTriangleTreeNode = new TriangleTreeNode(copyBoard, node, legalMove);
                 node.children.add(newTriangleTreeNode);
                 createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
             }
