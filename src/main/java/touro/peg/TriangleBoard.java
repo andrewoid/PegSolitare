@@ -1,5 +1,8 @@
 package touro.peg;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 public class TriangleBoard {
     private boolean[] pegs = new boolean[15];
 
@@ -24,31 +27,31 @@ public class TriangleBoard {
     }
 
     public boolean equalsBoard(TriangleBoard board) {
-        if (compareBoards(board.getPegs())){
+        if (Arrays.equals(this.getPegs(), board.getPegs())){
             return true;
         }
         boolean[] flipped = flipPegs(board.getPegs());
-        if (compareBoards(flipped))
+        if (Arrays.equals(this.getPegs(), flipped))
         {
             return true;
         }
         boolean[] rotated1 = rotatePegs(board.getPegs());
-        if (compareBoards(rotated1))
+        if (Arrays.equals(this.getPegs(), rotated1))
         {
             return true;
         }
         boolean[] rotated1Mirror = flipPegs(rotated1);
-        if (compareBoards(rotated1Mirror))
+        if (Arrays.equals(this.getPegs(), rotated1Mirror))
         {
             return true;
         }
         boolean[] rotated2 = rotatePegs(rotated1);
-        if (compareBoards(rotated2))
+        if (Arrays.equals(this.getPegs(), rotated2))
         {
             return true;
         }
         boolean[] rotated2Mirror = flipPegs(rotated2);
-        if (compareBoards(rotated2Mirror))
+        if (Arrays.equals(this.getPegs(), rotated2Mirror))
         {
             return true;
         }
@@ -94,15 +97,6 @@ public class TriangleBoard {
         flipped[14] = pegs[10];
 
         return flipped;
-    }
-
-    private boolean compareBoards(boolean[] otherPegs) {
-        for (int i = 0; i < this.getPegs().length; i++) {
-            if (this.getPegs()[i] != otherPegs[i]){
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override
