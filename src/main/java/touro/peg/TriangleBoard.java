@@ -44,11 +44,15 @@ public class TriangleBoard {
 
     public boolean isWin() {
         int numTrues = 0;
-
         for (boolean peg : pegs)
         {
-            if (peg) {
+            if (peg)
+            {
                 numTrues++;
+                if (numTrues == 2)
+                {
+                    return false;
+                }
             }
         }
         return numTrues == 1;
