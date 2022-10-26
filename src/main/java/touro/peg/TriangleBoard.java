@@ -2,13 +2,15 @@ package touro.peg;
 
 public class TriangleBoard {
     private boolean[] pegs = new boolean[15];
+    private int startingIndex;
 
     private PlayMove playMove;
 
     public TriangleBoard(int startingIndex) {
         this.playMove = new PlayMove(this);
         for (int i = 0; i < pegs.length; i++) {
-            pegs[i] = i != startingIndex;
+
+            this.startingIndex = startingIndex;
         }
     }
 
@@ -51,5 +53,24 @@ public class TriangleBoard {
                 intPeg(12), intPeg(13), intPeg(14));
     }
 
+    public boolean isWin() {
+        int numTrues = 0;
+        for (boolean peg : pegs)
+        {
+            if (peg)
+            {
+                numTrues++;
+                if (numTrues == 2)
+                {
+                    return false;
+                }
+            }
+        }
+        return numTrues == 1;
+    }
+
+    public boolean isBestWin() {
+        return isWin() && pegs[startingIndex];
+    }
 
 }
