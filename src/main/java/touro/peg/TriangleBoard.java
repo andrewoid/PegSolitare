@@ -7,10 +7,10 @@ public class TriangleBoard {
     private PlayMove playMove;
 
     public TriangleBoard(int startingIndex) {
+        this.startingIndex = startingIndex;
         this.playMove = new PlayMove(this);
         for (int i = 0; i < pegs.length; i++) {
-
-            this.startingIndex = startingIndex;
+            pegs[i] = i != startingIndex;
         }
     }
 
