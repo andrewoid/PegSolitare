@@ -1,16 +1,22 @@
 package touro.peg;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PlayMove {
     private TriangleBoard board;
     private List<Move> movesList = new ArrayList<>();
 
+    private List<Move> legalMoves = new ArrayList<>();
 
-    public PlayMove(TriangleBoard board){
+
+
+    public PlayMove(TriangleBoard board, List<Move> legalMoves){
         this.board = board;
+        Collections.copy(this.legalMoves, legalMoves);
     }
+
 
     public void move(Move move) {
         if(isValidMove(move)){
@@ -22,7 +28,7 @@ public class PlayMove {
         }
     }
     public boolean isValidMove(Move move) {
-        return isPossible(move) && board.legalMoves.contains(move);
+        return isPossible(move) && this.legalMoves.contains(move);
     }
 
     private boolean isPossible(Move move) {
