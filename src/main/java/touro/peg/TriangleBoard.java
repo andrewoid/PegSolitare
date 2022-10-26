@@ -1,5 +1,7 @@
 package touro.peg;
 
+import java.util.Arrays;
+
 public class TriangleBoard {
     private boolean[] pegs = new boolean[15];
     private final int startingIndex;
@@ -26,6 +28,80 @@ public class TriangleBoard {
 
     private int intPeg(int index) {
         return pegs[index] ? 1 : 0;
+    }
+
+    public boolean equalsBoard(TriangleBoard board) {
+        if (Arrays.equals(pegs, board.pegs))
+        {
+            return true;
+        }
+        boolean[] flipped = flipPegs(board.pegs);
+        if (Arrays.equals(pegs, flipped))
+        {
+            return true;
+        }
+        boolean[] rotated1 = rotatePegs(board.pegs);
+        if (Arrays.equals(pegs, rotated1))
+        {
+            return true;
+        }
+        boolean[] rotated1Mirror = flipPegs(rotated1);
+        if (Arrays.equals(pegs, rotated1Mirror))
+        {
+            return true;
+        }
+        boolean[] rotated2 = rotatePegs(rotated1);
+        if (Arrays.equals(pegs, rotated2))
+        {
+            return true;
+        }
+        boolean[] rotated2Mirror = flipPegs(rotated2);
+        if (Arrays.equals(pegs, rotated2Mirror))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean[] rotatePegs(boolean[] pegs) {
+        boolean[] rotated = new boolean[15];
+        rotated[0] = pegs[14];
+        rotated[1] = pegs[9];
+        rotated[2] = pegs[13];
+        rotated[3] = pegs[5];
+        rotated[4] = pegs[8];
+        rotated[5] = pegs[12];
+        rotated[6] = pegs[2];
+        rotated[7] = pegs[4];
+        rotated[8] = pegs[7];
+        rotated[9] = pegs[11];
+        rotated[10] = pegs[0];
+        rotated[11] = pegs[1];
+        rotated[12] = pegs[3];
+        rotated[13] = pegs[6];
+        rotated[14] = pegs[10];
+        return rotated;
+    }
+
+    private boolean[] flipPegs(boolean[] pegs) {
+        boolean[] flipped = new boolean[15];
+        flipped[0] = pegs[0];
+        flipped[1] = pegs[2];
+        flipped[2] = pegs[1];
+        flipped[3] = pegs[5];
+        flipped[4] = pegs[4];
+        flipped[5] = pegs[3];
+        flipped[6] = pegs[9];
+        flipped[7] = pegs[8];
+        flipped[8] = pegs[7];
+        flipped[9] = pegs[6];
+        flipped[10] = pegs[14];
+        flipped[11] = pegs[13];
+        flipped[12] = pegs[12];
+        flipped[13] = pegs[11];
+        flipped[14] = pegs[10];
+
+        return flipped;
     }
 
     @Override
