@@ -1,6 +1,5 @@
 package touro.peg;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class TriangleBoard {
@@ -27,31 +26,32 @@ public class TriangleBoard {
     }
 
     public boolean equalsBoard(TriangleBoard board) {
-        if (Arrays.equals(this.getPegs(), board.getPegs())){
-            return true;
-        }
-        boolean[] flipped = flipPegs(board.getPegs());
-        if (Arrays.equals(this.getPegs(), flipped))
+        if (Arrays.equals(pegs, board.pegs))
         {
             return true;
         }
-        boolean[] rotated1 = rotatePegs(board.getPegs());
-        if (Arrays.equals(this.getPegs(), rotated1))
+        boolean[] flipped = flipPegs(board.pegs);
+        if (Arrays.equals(pegs, flipped))
+        {
+            return true;
+        }
+        boolean[] rotated1 = rotatePegs(board.pegs);
+        if (Arrays.equals(pegs, rotated1))
         {
             return true;
         }
         boolean[] rotated1Mirror = flipPegs(rotated1);
-        if (Arrays.equals(this.getPegs(), rotated1Mirror))
+        if (Arrays.equals(pegs, rotated1Mirror))
         {
             return true;
         }
         boolean[] rotated2 = rotatePegs(rotated1);
-        if (Arrays.equals(this.getPegs(), rotated2))
+        if (Arrays.equals(pegs, rotated2))
         {
             return true;
         }
         boolean[] rotated2Mirror = flipPegs(rotated2);
-        if (Arrays.equals(this.getPegs(), rotated2Mirror))
+        if (Arrays.equals(pegs, rotated2Mirror))
         {
             return true;
         }
