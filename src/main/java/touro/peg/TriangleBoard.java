@@ -23,6 +23,14 @@ public class TriangleBoard {
         return pegs[index] ? 1 : 0;
     }
 
+    public boolean[] boardCopy(){
+        boolean[] pegsCopy = new boolean[15];
+        for(int i = 0; i <pegs.length; i++){
+            pegsCopy[i] = pegs[i];
+        }
+        return pegsCopy;
+    }
+
     @Override
     public String toString() {
         return String.format("""
