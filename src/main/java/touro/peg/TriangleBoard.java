@@ -7,12 +7,12 @@ public class TriangleBoard {
 
     public TriangleBoard(int startingIndex) {
         this.playMove = new PlayMove(this);
-        for (int i = 0; i < pegs.length; i++)
-        {
+        for (int i = 0; i < pegs.length; i++) {
             pegs[i] = i != startingIndex;
         }
     }
-    public TriangleBoard(boolean[] pegs){
+
+    public TriangleBoard(boolean[] pegs) {
         this.playMove = new PlayMove(this);
         System.arraycopy(pegs, 0, this.pegs, 0, pegs.length);
     }
@@ -20,12 +20,15 @@ public class TriangleBoard {
     public boolean[] getPegs() {
         return pegs;
     }
+
     public void setPeg(int pegIndex, boolean pegStatus) {
         pegs[pegIndex] = pegStatus;
     }
+
     public PlayMove getPlayMove() {
         return playMove;
     }
+
     public boolean hasPeg(int index) {
         return pegs[index];
     }

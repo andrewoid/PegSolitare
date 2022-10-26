@@ -33,9 +33,9 @@ public class Move {
 
     @Override
     public String toString() {
-        return "Move =" +
-                " index from:" + indexFrom +
-                " index remove:" + indexRemove +
-                " index to:" + indexTo;
+        return "Move ="
+                + " index from:" + indexFrom
+                + " index remove:" + indexRemove
+                + " index to:" + indexTo;
     }
 }
