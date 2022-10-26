@@ -16,6 +16,46 @@ class TriangleBoardTest {
     }
 
     @Test
+    public void equalsBoardIdentical() {
+        //Given
+        TriangleBoard board = new TriangleBoard(0);
+        TriangleBoard otherBoard = new TriangleBoard(0);
+        //When
+        //Then
+        assertTrue(board.equalsBoard(otherBoard));
+    }
+
+    @Test
+    public void equalsBoardMirror() {
+        //Given
+        TriangleBoard board = new TriangleBoard(1);
+        TriangleBoard otherBoard = new TriangleBoard(2);
+        //When
+        //Then
+        assertTrue(board.equalsBoard(otherBoard));
+    }
+
+    @Test
+    public void equalsBoardRotated() {
+        //Given
+        TriangleBoard board = new TriangleBoard(0);
+        TriangleBoard otherBoard = new TriangleBoard(14);
+        //When
+        //Then
+        assertTrue(board.equalsBoard(otherBoard));
+    }
+
+    @Test
+    public void equalsBoardFalse() {
+        //Given
+        TriangleBoard board = new TriangleBoard(1);
+        TriangleBoard otherBoard = new TriangleBoard(10);
+        //When
+        //Then
+        assertFalse(board.equalsBoard(otherBoard));
+    }
+
+    @Test
     public void testToString() {
         //Given
         //When
@@ -29,4 +69,60 @@ class TriangleBoardTest {
                 1 1 1 1 1""";
         assertEquals(expected, board.toString());
     }
+
+    @Test
+    public void isWin() {
+        //Given
+        TriangleBoard board = new TriangleBoard(0);
+        for (int i = 2; i < 15; i++)
+        {
+            board.setPeg(i, false);
+        }
+        //When
+        //Then
+        assertTrue(board.isWin());
+    }
+
+    @Test
+    public void isBestWin() {
+        //Given
+        TriangleBoard board = new TriangleBoard(0);
+        board.setPeg(0, true);
+        for (int i = 1; i < 15; i++)
+        {
+            board.setPeg(i, false);
+        }
+        //When
+        //Then
+        assertTrue(board.isBestWin());
+    }
+
+    @Test
+    public void isFalseWin() {
+        //Given
+        TriangleBoard board = new TriangleBoard(0);
+        for (int i = 2; i < 15; i++)
+        {
+            board.setPeg(i, true);
+        }
+        //When
+        //Then
+        assertFalse(board.isWin());
+    }
+
+    @Test
+    public void isFalseBestWin() {
+        //Given
+        TriangleBoard board = new TriangleBoard(1);
+        board.setPeg(0, true);
+        for (int i = 1; i < 15; i++)
+        {
+            board.setPeg(i, false);
+        }
+        //When
+        //Then
+        assertFalse(board.isBestWin());
+    }
+
+
 }
