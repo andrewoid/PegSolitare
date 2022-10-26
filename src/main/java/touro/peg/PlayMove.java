@@ -14,7 +14,8 @@ public class PlayMove {
 
     public PlayMove(TriangleBoard board, List<Move> legalMoves){
         this.board = board;
-        Collections.copy(this.legalMoves, legalMoves);
+        this.legalMoves = legalMoves;
+
     }
 
 

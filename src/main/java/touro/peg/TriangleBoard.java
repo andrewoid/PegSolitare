@@ -27,8 +27,7 @@ public class TriangleBoard {
 
     public TriangleBoard triangleBoardCopy(){
         TriangleBoard triangleBoardCopy = new TriangleBoard(0);
-        boolean[] pegsCopy = new boolean[15];
-        System.arraycopy(pegs, 0, pegsCopy,0, 15 );
+        System.arraycopy(pegs, 0, triangleBoardCopy.pegs,0, 15 );
         return triangleBoardCopy;
     }
 
