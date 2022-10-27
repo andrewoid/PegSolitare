@@ -1,6 +1,9 @@
 package touro.peg;
 
+
+import java.util.List;
 import java.util.Arrays;
+
 
 public class TriangleBoard {
     private boolean[] pegs = new boolean[15];
@@ -8,8 +11,7 @@ public class TriangleBoard {
 
     public TriangleBoard(int startingIndex) {
         this.startingIndex = startingIndex;
-        for (int i = 0; i < pegs.length; i++)
-        {
+        for (int i = 0; i < pegs.length; i++) {
             pegs[i] = i != startingIndex;
         }
     }
@@ -30,34 +32,35 @@ public class TriangleBoard {
         return pegs[index] ? 1 : 0;
     }
 
+
+    public TriangleBoard triangleBoardCopy() {
+        TriangleBoard triangleBoardCopy = new TriangleBoard(0);
+        System.arraycopy(pegs, 0, triangleBoardCopy.pegs, 0, 15);
+        return triangleBoardCopy;
+    }
+
     public boolean equalsBoard(TriangleBoard board) {
-        if (Arrays.equals(pegs, board.pegs))
-        {
+        if (Arrays.equals(pegs, board.pegs)) {
             return true;
         }
         boolean[] flipped = flipPegs(board.pegs);
-        if (Arrays.equals(pegs, flipped))
-        {
+        if (Arrays.equals(pegs, flipped)) {
             return true;
         }
         boolean[] rotated1 = rotatePegs(board.pegs);
-        if (Arrays.equals(pegs, rotated1))
-        {
+        if (Arrays.equals(pegs, rotated1)) {
             return true;
         }
         boolean[] rotated1Mirror = flipPegs(rotated1);
-        if (Arrays.equals(pegs, rotated1Mirror))
-        {
+        if (Arrays.equals(pegs, rotated1Mirror)) {
             return true;
         }
         boolean[] rotated2 = rotatePegs(rotated1);
-        if (Arrays.equals(pegs, rotated2))
-        {
+        if (Arrays.equals(pegs, rotated2)) {
             return true;
         }
         boolean[] rotated2Mirror = flipPegs(rotated2);
-        if (Arrays.equals(pegs, rotated2Mirror))
-        {
+        if (Arrays.equals(pegs, rotated2Mirror)) {
             return true;
         }
         return false;
@@ -102,6 +105,7 @@ public class TriangleBoard {
         flipped[14] = pegs[10];
 
         return flipped;
+
     }
 
     @Override
@@ -118,15 +122,13 @@ public class TriangleBoard {
                 intPeg(12), intPeg(13), intPeg(14));
     }
 
+
     public boolean isWin() {
         int numTrues = 0;
-        for (boolean peg : pegs)
-        {
-            if (peg)
-            {
+        for (boolean peg : pegs) {
+            if (peg) {
                 numTrues++;
-                if (numTrues == 2)
-                {
+                if (numTrues == 2) {
                     return false;
                 }
             }
@@ -137,5 +139,6 @@ public class TriangleBoard {
     public boolean isBestWin() {
         return isWin() && pegs[startingIndex];
     }
+
 
 }
