@@ -11,14 +11,13 @@ public class PlayMove {
     private List<Move> legalMoves = new ArrayList<>();
 
 
-
-    public PlayMove(TriangleBoard board, List<Move> legalMoves){
+    public PlayMove(TriangleBoard board, List<Move> legalMoves) {
         this.board = board;
         this.legalMoves = legalMoves;
     }
 
     public void move(Move move) {
-        if(isValidMove(move)){
+        if (isValidMove(move)) {
             board.setPeg(move.getIndexFrom(), false);
             board.setPeg(move.getIndexRemove(), false);
             board.setPeg(move.getIndexTo(), true);
@@ -26,6 +25,7 @@ public class PlayMove {
             movesList.add(move);
         }
     }
+
     public boolean isValidMove(Move move) {
         return isPossible(move) && this.legalMoves.contains(move);
     }
