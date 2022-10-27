@@ -19,6 +19,7 @@ class TriangleBoardTreeTest
         //then
         // check if 1st index in getLeaves() list's board == expected board
     }
+    
     @Test
     public void constructor()
     {
