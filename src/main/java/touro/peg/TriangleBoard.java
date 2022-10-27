@@ -34,10 +34,11 @@ public class TriangleBoard {
     }
 
 
-    public TriangleBoard triangleBoardCopy(){
+    public TriangleBoard triangleBoardCopy() {
         TriangleBoard triangleBoardCopy = new TriangleBoard(0);
-        System.arraycopy(pegs, 0, triangleBoardCopy.pegs,0, 15 );
+        System.arraycopy(pegs, 0, triangleBoardCopy.pegs, 0, 15);
         return triangleBoardCopy;
+    }
 
     public boolean equalsBoard(TriangleBoard board) {
         if (Arrays.equals(pegs, board.pegs))

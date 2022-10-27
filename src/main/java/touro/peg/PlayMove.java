@@ -15,9 +15,7 @@ public class PlayMove {
     public PlayMove(TriangleBoard board, List<Move> legalMoves){
         this.board = board;
         this.legalMoves = legalMoves;
-
     }
-
 
     public void move(Move move) {
         if(isValidMove(move)){
