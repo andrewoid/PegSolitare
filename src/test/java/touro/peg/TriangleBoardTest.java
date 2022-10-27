@@ -16,6 +16,46 @@ class TriangleBoardTest {
     }
 
     @Test
+    public void equalsBoardIdentical() {
+        //Given
+        TriangleBoard board = new TriangleBoard(0);
+        TriangleBoard otherBoard = new TriangleBoard(0);
+        //When
+        //Then
+        assertTrue(board.equalsBoard(otherBoard));
+    }
+
+    @Test
+    public void equalsBoardMirror() {
+        //Given
+        TriangleBoard board = new TriangleBoard(1);
+        TriangleBoard otherBoard = new TriangleBoard(2);
+        //When
+        //Then
+        assertTrue(board.equalsBoard(otherBoard));
+    }
+
+    @Test
+    public void equalsBoardRotated() {
+        //Given
+        TriangleBoard board = new TriangleBoard(0);
+        TriangleBoard otherBoard = new TriangleBoard(14);
+        //When
+        //Then
+        assertTrue(board.equalsBoard(otherBoard));
+    }
+
+    @Test
+    public void equalsBoardFalse() {
+        //Given
+        TriangleBoard board = new TriangleBoard(1);
+        TriangleBoard otherBoard = new TriangleBoard(10);
+        //When
+        //Then
+        assertFalse(board.equalsBoard(otherBoard));
+    }
+
+    @Test
     public void testToString() {
         //Given
         //When

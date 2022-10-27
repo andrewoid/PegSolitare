@@ -26,6 +26,7 @@ public class TriangleBoardTree {
      */
     private List<TriangleTreeNode> leaves;
 
+
     class TriangleTreeNode {
         TriangleBoard triangleBoard;
         private TriangleTreeNode parent;
