@@ -5,10 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class PlayMove {
+
     private TriangleBoard board;
     private List<Move> movesList = new ArrayList<>();
 
-    private List<Move> legalMoves = new ArrayList<>();
+    private List<Move> legalMoves;
 
 
     public PlayMove(TriangleBoard board, List<Move> legalMoves) {
@@ -16,13 +17,15 @@ public class PlayMove {
         this.legalMoves = legalMoves;
     }
 
+    public List<Move> getLegalMoves() {
+        return legalMoves;
+    }
+
     public void move(Move move) {
         if (isValidMove(move)) {
             board.setPeg(move.getIndexFrom(), false);
             board.setPeg(move.getIndexRemove(), false);
             board.setPeg(move.getIndexTo(), true);
-
-            movesList.add(move);
         }
     }
 

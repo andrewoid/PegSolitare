@@ -6,14 +6,25 @@ import java.util.Arrays;
 
 
 public class TriangleBoard {
+
+    private static final List<Move>  legalMoves = new LegalMovesFactory().legalMoves;
+
     private boolean[] pegs = new boolean[15];
-    private final int startingIndex;
+    private int startingIndex;
+
+    private PlayMove playMove;
 
     public TriangleBoard(int startingIndex) {
         this.startingIndex = startingIndex;
+        this.playMove = new PlayMove(this, legalMoves);
         for (int i = 0; i < pegs.length; i++) {
             pegs[i] = i != startingIndex;
         }
+    }
+
+    public TriangleBoard(boolean[] pegs) {
+        this.playMove = new PlayMove(this, legalMoves);
+        System.arraycopy(pegs, 0, this.pegs, 0, pegs.length);
     }
 
     public boolean[] getPegs() {
@@ -22,6 +33,10 @@ public class TriangleBoard {
 
     public void setPeg(int pegIndex, boolean pegStatus) {
         pegs[pegIndex] = pegStatus;
+    }
+
+    public PlayMove getPlayMove() {
+        return playMove;
     }
 
     public boolean hasPeg(int index) {
