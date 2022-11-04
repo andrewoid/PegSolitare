@@ -43,4 +43,17 @@ class TriangleBoardTreeTest
             0 0 0 0 0""";
         assertEquals(expected, triangleBoardTree.getLeaves().get(0).triangleBoard.toString());
     }
+
+    @Test
+    public void solutions()
+    {
+        // given
+        TriangleBoard triangleBoard = new TriangleBoard(0);
+        // when
+
+        // then
+        System.out.println(triangleBoard.getSolutions());
+
+        System.out.println(triangleBoard.getBestSolutions());
+    }
 }

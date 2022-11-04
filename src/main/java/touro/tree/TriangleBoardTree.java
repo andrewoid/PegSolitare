@@ -26,8 +26,7 @@ public class TriangleBoardTree {
      */
     private List<TriangleTreeNode> leaves;
 
-
-    class TriangleTreeNode {
+    public class TriangleTreeNode {
         TriangleBoard triangleBoard;
         private TriangleTreeNode parent;
         private Move move;
@@ -38,6 +37,11 @@ public class TriangleBoardTree {
             this.parent = parent;
             this.move = move;
             this.children = new ArrayList<>();
+        }
+
+        public TriangleBoard getTriangleBoard()
+        {
+            return this.triangleBoard;
         }
 
         @Override

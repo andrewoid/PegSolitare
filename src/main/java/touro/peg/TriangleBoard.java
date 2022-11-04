@@ -1,6 +1,9 @@
 package touro.peg;
 
 
+import touro.tree.TriangleBoardTree;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
@@ -155,5 +158,34 @@ public class TriangleBoard {
         return isWin() && pegs[startingIndex];
     }
 
+    public List<TriangleBoard> getSolutions()
+    {
+        TriangleBoardTree tree = new TriangleBoardTree(this);
+        List<TriangleBoardTree.TriangleTreeNode> leaves = tree.getLeaves();
+        ArrayList<TriangleBoard> solutions = new ArrayList<>();
+        for (TriangleBoardTree.TriangleTreeNode node : leaves)
+        {
+            if (node.getTriangleBoard().isWin())
+            {
+                solutions.add(node.getTriangleBoard());
+            }
+        }
+        return solutions;
+    }
+
+    public List<TriangleBoard> getBestSolutions()
+    {
+        TriangleBoardTree tree = new TriangleBoardTree(this);
+        List<TriangleBoardTree.TriangleTreeNode> leaves = tree.getLeaves();
+        ArrayList<TriangleBoard> bestSolutions = new ArrayList<>();
+        for (TriangleBoardTree.TriangleTreeNode node : leaves)
+        {
+            if (node.getTriangleBoard().isBestWin())
+            {
+                bestSolutions.add(node.getTriangleBoard());
+            }
+        }
+        return bestSolutions;
+    }
 
 }
