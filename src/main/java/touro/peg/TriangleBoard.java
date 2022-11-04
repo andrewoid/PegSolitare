@@ -2,6 +2,7 @@ package touro.peg;
 
 
 import touro.tree.TriangleBoardTree;
+import touro.tree.TriangleBoardTree.TriangleTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,7 +134,8 @@ public class TriangleBoard {
                            %d %d
                           %d %d %d
                          %d %d %d %d
-                        %d %d %d %d %d""",
+                        %d %d %d %d %d
+                        """,
                 intPeg(0), intPeg(1), intPeg(2), intPeg(3),
                 intPeg(4), intPeg(5), intPeg(6), intPeg(7),
                 intPeg(8), intPeg(9), intPeg(10), intPeg(11),
@@ -161,11 +163,11 @@ public class TriangleBoard {
     public List<TriangleBoard> getSolutions()
     {
         TriangleBoardTree tree = new TriangleBoardTree(this);
-        List<TriangleBoardTree.TriangleTreeNode> leaves = tree.getLeaves();
+        List<TriangleTreeNode> leaves = tree.getLeaves();
         ArrayList<TriangleBoard> solutions = new ArrayList<>();
-        for (TriangleBoardTree.TriangleTreeNode node : leaves)
+        for (TriangleTreeNode node : leaves)
         {
-            if (node.getTriangleBoard().isWin())
+            if (node.getTriangleBoard().isWin() && !contains(solutions, node.getTriangleBoard()))
             {
                 solutions.add(node.getTriangleBoard());
             }
@@ -176,9 +178,9 @@ public class TriangleBoard {
     public List<TriangleBoard> getBestSolutions()
     {
         TriangleBoardTree tree = new TriangleBoardTree(this);
-        List<TriangleBoardTree.TriangleTreeNode> leaves = tree.getLeaves();
+        List<TriangleTreeNode> leaves = tree.getLeaves();
         ArrayList<TriangleBoard> bestSolutions = new ArrayList<>();
-        for (TriangleBoardTree.TriangleTreeNode node : leaves)
+        for (TriangleTreeNode node : leaves)
         {
             if (node.getTriangleBoard().isBestWin())
             {
@@ -186,6 +188,34 @@ public class TriangleBoard {
             }
         }
         return bestSolutions;
+    }
+
+    public ArrayList<List<TriangleTreeNode>> getPathsToBestSolutions()
+    {
+        TriangleBoardTree tree = new TriangleBoardTree(this);
+        List<TriangleTreeNode> leaves = tree.getLeaves();
+        ArrayList<List<TriangleTreeNode>> paths = new ArrayList<>();
+        for (TriangleTreeNode node : leaves)
+        {
+            if (node.getTriangleBoard().isBestWin())
+            {
+                paths.add(tree.getSequenceToNode(node));
+            }
+        }
+        return paths;
+    }
+
+    public boolean contains(List<TriangleBoard> boards, TriangleBoard board)
+    {
+        // temporary method until recursion gets optimized so as not to store a whole bunch of the same leaves
+        for (TriangleBoard triangleBoard : boards)
+        {
+            if (triangleBoard.equalsBoard(board))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

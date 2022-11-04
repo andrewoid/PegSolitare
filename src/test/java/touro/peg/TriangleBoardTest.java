@@ -1,6 +1,10 @@
 package touro.peg;
 
 import org.junit.jupiter.api.Test;
+import touro.tree.TriangleBoardTree;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -66,7 +70,8 @@ class TriangleBoardTest {
                    1 1
                   1 1 1
                  1 1 1 1
-                1 1 1 1 1""";
+                1 1 1 1 1
+                """;
         assertEquals(expected, board.toString());
     }
 
@@ -124,5 +129,42 @@ class TriangleBoardTest {
         assertFalse(board.isBestWin());
     }
 
+    @Test
+    public void solutions()
+    {
+        // given
+        TriangleBoard triangleBoard = new TriangleBoard(0);
+        // when
 
+        // then
+        for (TriangleBoard board : triangleBoard.getSolutions())
+        {
+            System.out.println(board);
+        }
+    }
+
+    @Test
+    public void bestSolutions()
+    {
+        // given
+        TriangleBoard triangleBoard = new TriangleBoard(0);
+        // when
+
+        // then
+        for (TriangleBoard board : triangleBoard.getBestSolutions())
+        {
+            System.out.println(board);
+        }
+    }
+
+    @Test
+    public void pathToBestSolutions()
+    {
+        // given
+        TriangleBoard triangleBoard = new TriangleBoard(0);
+        // when
+
+        // then
+        System.out.println(triangleBoard.getPathsToBestSolutions().size());
+    }
 }
