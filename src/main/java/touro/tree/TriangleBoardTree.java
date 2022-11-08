@@ -107,20 +107,6 @@ public class TriangleBoardTree {
 
         return node;
     }
-
-    /*  Given a TriangleTreeNode,
-        this method returns a List of TriangleTreeNodes that resulted in the given node */
-//    public List<TriangleTreeNode> getSequenceToNode(TriangleTreeNode treeNode) {
-//        TriangleTreeNode node = treeNode;
-//        List<TriangleTreeNode> listOfMovesToNode = new ArrayList<>();
-//        listOfMovesToNode.add(node);
-//        while (node.parent != null) {
-//            node = node.parent;
-//            listOfMovesToNode.add(0, node);
-//        }
-//        return listOfMovesToNode;
-//
-//    }
 }
 
 
