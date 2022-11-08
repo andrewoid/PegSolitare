@@ -5,9 +5,6 @@ import touro.tree.TriangleBoardTree;
 
 public class GameStats {
     private TriangleBoardTree triangleBoardTree;
-    private TriangleBoard[] winningPositions;
-    private TriangleBoard[] losingPositions;
-    private TriangleBoard[] uniquePositions;
 
     public GameStats(TriangleBoardTree triangleBoardTree) {
         this.triangleBoardTree = triangleBoardTree;
@@ -33,7 +30,7 @@ public class GameStats {
         return new TriangleBoard[0];
     }
 
-    private TriangleBoard[] calculateWinningPositions(){
+    private TriangleBoard[] calculateWinningPositions() {
         return new TriangleBoard[0];
     }
 }

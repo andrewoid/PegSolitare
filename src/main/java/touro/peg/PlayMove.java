@@ -7,14 +7,12 @@ import java.util.List;
 public class PlayMove {
 
     private TriangleBoard board;
-    private List<Move> movesList = new ArrayList<>();
-
     private List<Move> legalMoves;
 
 
-    public PlayMove(TriangleBoard board, List<Move> legalMoves) {
+    public PlayMove(TriangleBoard board) {
         this.board = board;
-        this.legalMoves = legalMoves;
+        this.legalMoves = new LegalMovesFactory().legalMoves;;
     }
 
     public List<Move> getLegalMoves() {

@@ -11,7 +11,7 @@ class PlayMoveTest {
     TriangleBoard board = new TriangleBoard(0);
 
     LegalMovesFactory factory = new LegalMovesFactory();
-    PlayMove play = new PlayMove(board, factory.legalMoves);
+    PlayMove play = new PlayMove(board);
 
     @Test
     void move_isValid() {
