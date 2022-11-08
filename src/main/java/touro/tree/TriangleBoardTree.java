@@ -4,6 +4,7 @@ import touro.peg.Move;
 import touro.peg.TriangleBoard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -11,10 +12,9 @@ public class TriangleBoardTree {
     /*
      * A tree is created with a given board in any state.
      * A root node is created with the given board only.
-     * For every possible next move, a child of the current node is created containing
-     *   1. the current state of the board,
-     *   2. it's parent,
-     *   3. and move
+     * For every possible next move, a child of the current node is created containing:
+     *   1. the current state of the board
+     *   2. its move
      * The child is added to the parent node's list of children.
      *
      * This is called recursively until no other moves can be made.
@@ -23,19 +23,21 @@ public class TriangleBoardTree {
      *
      * When there are no more possible moves, the current node is added to the leaves list.
      * A leaf's board with one peg is a winning board
+     *
+     * All boards are added to the found map of boards and nodes, used to avoid recalculating
+     * equivalent boards.
      */
     private List<TriangleTreeNode> leaves;
+    private HashMap<TriangleBoard, TriangleTreeNode> found;
 
 
     class TriangleTreeNode {
         TriangleBoard triangleBoard;
-        private TriangleTreeNode parent;
         private Move move;
         private List<TriangleTreeNode> children;
 
-        public TriangleTreeNode(TriangleBoard triangleBoard, TriangleTreeNode parent, Move move) {
+        public TriangleTreeNode(TriangleBoard triangleBoard, Move move) {
             this.triangleBoard = triangleBoard;
-            this.parent = parent;
             this.move = move;
             this.children = new ArrayList<>();
         }
@@ -50,8 +52,10 @@ public class TriangleBoardTree {
     }
 
     public TriangleBoardTree(TriangleBoard board) {
-        TriangleTreeNode rootNode = new TriangleTreeNode(board, null, null);
+        TriangleTreeNode rootNode = new TriangleTreeNode(board, null);
         this.leaves = new ArrayList<>();
+        this.found = new HashMap<>();
+        found.put(board, rootNode);
 
         createTreeAndStoreLeaves(rootNode, board);
     }
@@ -65,10 +69,21 @@ public class TriangleBoardTree {
             if (board.getPlayMove().isValidMove(legalMove)) {
                 TriangleBoard copyBoard = new TriangleBoard(board.getPegs());
                 copyBoard.getPlayMove().move(legalMove);
-                TriangleTreeNode newTriangleTreeNode
-                        = new TriangleTreeNode(copyBoard, node, legalMove);
+
+
+                TriangleTreeNode newTriangleTreeNode = findExistingBoard(copyBoard);
+                boolean shouldCreate = false;
+                if (newTriangleTreeNode == null) {
+                    newTriangleTreeNode = new TriangleTreeNode(copyBoard, legalMove);
+                    shouldCreate = true;
+                }
+
                 node.children.add(newTriangleTreeNode);
-                createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
+
+                if (shouldCreate) {
+                    found.put(copyBoard, newTriangleTreeNode);
+                    createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
+                }
             }
         }
         if (node.children.size() == 0) {
@@ -76,19 +91,36 @@ public class TriangleBoardTree {
         }
     }
 
+    private TriangleTreeNode findExistingBoard(TriangleBoard copyBoard)
+    {
+        TriangleTreeNode node = null;
+        TriangleTreeNode test;
+
+        for (TriangleBoard board : copyBoard.getEquivalentBoards())
+        {
+            if ((test = found.get(board)) != null)
+            {
+                node = test;
+                break;
+            }
+        }
+
+        return node;
+    }
+
     /*  Given a TriangleTreeNode,
         this method returns a List of TriangleTreeNodes that resulted in the given node */
-    public List<TriangleTreeNode> getSequenceToNode(TriangleTreeNode treeNode) {
-        TriangleTreeNode node = treeNode;
-        List<TriangleTreeNode> listOfMovesToNode = new ArrayList<>();
-        listOfMovesToNode.add(node);
-        while (node.parent != null) {
-            node = node.parent;
-            listOfMovesToNode.add(0, node);
-        }
-        return listOfMovesToNode;
-
-    }
+//    public List<TriangleTreeNode> getSequenceToNode(TriangleTreeNode treeNode) {
+//        TriangleTreeNode node = treeNode;
+//        List<TriangleTreeNode> listOfMovesToNode = new ArrayList<>();
+//        listOfMovesToNode.add(node);
+//        while (node.parent != null) {
+//            node = node.parent;
+//            listOfMovesToNode.add(0, node);
+//        }
+//        return listOfMovesToNode;
+//
+//    }
 }
 
 
