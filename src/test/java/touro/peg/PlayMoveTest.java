@@ -1,14 +1,17 @@
 package touro.peg;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayMoveTest {
 
     TriangleBoard board = new TriangleBoard(0);
-    PlayMove play = new PlayMove(board);
+
+    LegalMovesFactory factory = new LegalMovesFactory();
+    PlayMove play = new PlayMove(board, factory.legalMoves);
 
     @Test
     void move_isValid() {
