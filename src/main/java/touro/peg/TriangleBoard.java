@@ -20,6 +20,8 @@ public class TriangleBoard {
 
     private TriangleBoardTree tree;
 
+    private boolean bestSolutionPossible;
+
     public TriangleBoard(int startingIndex) {
         this.startingIndex = startingIndex;
         this.playMove = new PlayMove(this, legalMoves);
@@ -27,6 +29,7 @@ public class TriangleBoard {
             pegs[i] = i != startingIndex;
         }
         this.tree = new TriangleBoardTree(this);
+        bestSolutionPossible = getBestSolutions().size() != 0;
     }
 
     public TriangleBoard(boolean[] pegs) {
@@ -55,6 +58,10 @@ public class TriangleBoard {
         return pegs[index] ? 1 : 0;
     }
 
+    public boolean isThereAPossibleBestSolution()
+    {
+        return bestSolutionPossible;
+    }
 
     public TriangleBoard triangleBoardCopy() {
         TriangleBoard triangleBoardCopy = new TriangleBoard(0);
