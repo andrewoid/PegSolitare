@@ -18,17 +18,21 @@ public class TriangleBoard {
 
     private PlayMove playMove;
 
+    private TriangleBoardTree tree;
+
     public TriangleBoard(int startingIndex) {
         this.startingIndex = startingIndex;
         this.playMove = new PlayMove(this, legalMoves);
         for (int i = 0; i < pegs.length; i++) {
             pegs[i] = i != startingIndex;
         }
+        this.tree = new TriangleBoardTree(this);
     }
 
     public TriangleBoard(boolean[] pegs) {
         this.playMove = new PlayMove(this, legalMoves);
         System.arraycopy(pegs, 0, this.pegs, 0, pegs.length);
+        // TODO: somehow initialize tree here - if I do new TriangleBoardTree(this), StackOverflow
     }
 
     public boolean[] getPegs() {
@@ -162,9 +166,12 @@ public class TriangleBoard {
 
     public List<TriangleBoard> getSolutions()
     {
-        TriangleBoardTree tree = new TriangleBoardTree(this);
-        List<TriangleTreeNode> leaves = tree.getLeaves();
         ArrayList<TriangleBoard> solutions = new ArrayList<>();
+        if (tree == null)
+        {
+            return solutions;
+        }
+        List<TriangleTreeNode> leaves = tree.getLeaves();
         for (TriangleTreeNode node : leaves)
         {
             if (node.getTriangleBoard().isWin() && !contains(solutions, node.getTriangleBoard()))
@@ -177,9 +184,12 @@ public class TriangleBoard {
 
     public List<TriangleBoard> getBestSolutions()
     {
-        TriangleBoardTree tree = new TriangleBoardTree(this);
-        List<TriangleTreeNode> leaves = tree.getLeaves();
         ArrayList<TriangleBoard> bestSolutions = new ArrayList<>();
+        if (tree == null)
+        {
+            return bestSolutions;
+        }
+        List<TriangleTreeNode> leaves = tree.getLeaves();
         for (TriangleTreeNode node : leaves)
         {
             if (node.getTriangleBoard().isBestWin())
@@ -192,9 +202,12 @@ public class TriangleBoard {
 
     public ArrayList<List<TriangleTreeNode>> getPathsToBestSolutions()
     {
-        TriangleBoardTree tree = new TriangleBoardTree(this);
-        List<TriangleTreeNode> leaves = tree.getLeaves();
         ArrayList<List<TriangleTreeNode>> paths = new ArrayList<>();
+        if (tree == null)
+        {
+            return paths;
+        }
+        List<TriangleTreeNode> leaves = tree.getLeaves();
         for (TriangleTreeNode node : leaves)
         {
             if (node.getTriangleBoard().isBestWin())

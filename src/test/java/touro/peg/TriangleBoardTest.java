@@ -8,9 +8,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TriangleBoardTest {
+class TriangleBoardTest
+{
     @Test
-    public void constructor() {
+    public void constructor()
+    {
         //Given
         //When
         TriangleBoard board = new TriangleBoard(0);
@@ -20,7 +22,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void equalsBoardIdentical() {
+    public void equalsBoardIdentical()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         TriangleBoard otherBoard = new TriangleBoard(0);
@@ -30,7 +33,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void equalsBoardMirror() {
+    public void equalsBoardMirror()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(1);
         TriangleBoard otherBoard = new TriangleBoard(2);
@@ -40,7 +44,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void equalsBoardRotated() {
+    public void equalsBoardRotated()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         TriangleBoard otherBoard = new TriangleBoard(14);
@@ -50,7 +55,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void equalsBoardFalse() {
+    public void equalsBoardFalse()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(1);
         TriangleBoard otherBoard = new TriangleBoard(10);
@@ -60,7 +66,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void testToString() {
+    public void testToString()
+    {
         //Given
         //When
         TriangleBoard board = new TriangleBoard(0);
@@ -76,7 +83,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isWin() {
+    public void isWin()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         for (int i = 2; i < 15; i++)
@@ -89,7 +97,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isBestWin() {
+    public void isBestWin()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         board.setPeg(0, true);
@@ -103,7 +112,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isFalseWin() {
+    public void isFalseWin()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         for (int i = 2; i < 15; i++)
@@ -116,7 +126,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isFalseBestWin() {
+    public void isFalseBestWin()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(1);
         board.setPeg(0, true);
@@ -134,13 +145,39 @@ class TriangleBoardTest {
     {
         // given
         TriangleBoard triangleBoard = new TriangleBoard(0);
+
         // when
+        ArrayList<String> solutions = new ArrayList<>();
+        triangleBoard.getSolutions().forEach(board -> solutions.add(board.toString()));
 
         // then
-        for (TriangleBoard board : triangleBoard.getSolutions())
-        {
-            System.out.println(board);
-        }
+        String expectedA = """
+                    0
+                   0 0
+                  0 0 0
+                 0 0 0 0
+                0 0 1 0 0
+                """;
+
+        String expectedB = """
+                    0
+                   0 0
+                  0 0 0
+                 0 0 0 1
+                0 0 0 0 0
+                """;
+
+        String expectedC = """
+                    1
+                   0 0
+                  0 0 0
+                 0 0 0 0
+                0 0 0 0 0
+                """;
+        assertTrue(solutions.contains(expectedA));
+        assertTrue(solutions.contains(expectedB));
+        assertTrue(solutions.contains(expectedC));
+
     }
 
     @Test
@@ -148,13 +185,19 @@ class TriangleBoardTest {
     {
         // given
         TriangleBoard triangleBoard = new TriangleBoard(0);
+
         // when
+        TriangleBoard bestSolutions = triangleBoard.getBestSolutions().get(0);
 
         // then
-        for (TriangleBoard board : triangleBoard.getBestSolutions())
-        {
-            System.out.println(board);
-        }
+        String expected = """
+                    1
+                   0 0
+                  0 0 0
+                 0 0 0 0
+                0 0 0 0 0
+                """;
+        assertEquals(expected, bestSolutions.toString());
     }
 
     @Test
@@ -162,9 +205,13 @@ class TriangleBoardTest {
     {
         // given
         TriangleBoard triangleBoard = new TriangleBoard(0);
+
         // when
+        List<TriangleBoardTree.TriangleTreeNode> firstPath = triangleBoard.getPathsToBestSolutions().get(0);
+        int numMovesToReachFirst = 14;
 
         // then
-        System.out.println(triangleBoard.getPathsToBestSolutions().size());
+        //System.out.println(firstPath);
+        assertEquals(numMovesToReachFirst, firstPath.size()); // expected, actual
     }
 }
