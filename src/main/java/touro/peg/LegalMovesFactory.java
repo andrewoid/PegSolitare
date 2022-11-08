@@ -1,6 +1,5 @@
 package touro.peg;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LegalMovesFactory {
@@ -10,7 +9,7 @@ public class LegalMovesFactory {
         this.legalMoves = getLegalMovesList();
     }
 
-    private List<Move> getLegalMovesList() {
+    List<Move> getLegalMovesList() {
         List<Move> legalMoves = java.util.List.of(
                 new Move(0, 1, 3),
                 new Move(3, 1, 0),

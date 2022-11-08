@@ -12,8 +12,8 @@ public class GameFrame extends JFrame {
     private JComboBox pegFrom;
     private JComboBox pegTo;
     private JButton submit;
-    private TriangleBoard triangleBoard;
     private PlayMove playMove;
+    private LegalMovesFactory legalMovesFactory;
 
     public GameFrame() {
         setTitle("Peg Solitaire");
@@ -25,17 +25,16 @@ public class GameFrame extends JFrame {
         add(mainGameSpot);
         add(makeMove);
 
-        triangleBoard = new TriangleBoard(0);
-        playMove = new PlayMove(new TriangleBoard(0));
+        legalMovesFactory = new LegalMovesFactory();
+        playMove = new PlayMove(new TriangleBoard(0), legalMovesFactory.getLegalMovesList());
 
         pegSpots = new JRadioButton[15];
         for (int i = 0; i < 15; i++)
         {
-            JRadioButton spot = new JRadioButton((i + 1) + "", triangleBoard.hasPeg(i)); //TODO: do this based on playMove
+            JRadioButton spot = new JRadioButton((i + 1) + "", playMove.getBoard().hasPeg(i));
             spot.setEnabled(false);
             pegSpots[i] = spot;
         }
-
 
         displayBoard();
 
@@ -48,6 +47,7 @@ public class GameFrame extends JFrame {
             }
         }
         makeMove.add(pegFrom);
+
         pegTo = new JComboBox();
         for (int i = 0; i < 15; i++)
         {
@@ -71,8 +71,9 @@ public class GameFrame extends JFrame {
             int fromSpot = Integer.parseInt(String.valueOf(selected));
             selected = pegTo.getSelectedItem();
             int toSpot = Integer.parseInt(String.valueOf(selected));
-            playMove.move(new Move (fromSpot, 2, toSpot)); //TODO: get indexRemove??
-            displayBoard();
+            int jumped = (fromSpot + toSpot) / 2;
+            playMove.move(new Move(fromSpot - 1, jumped - 1, toSpot - 1));
+            updateBoard(fromSpot, toSpot);
 
         } catch (NumberFormatException e)
         {
@@ -80,7 +81,6 @@ public class GameFrame extends JFrame {
         }
 
     }
-
 
     private void displayBoard() {
         int next = 0;
@@ -92,9 +92,9 @@ public class GameFrame extends JFrame {
                 {
                     break;
                 }
-                if ((i == 0 && j != 4) ||
-                    (i == 1 && (j < 3 || j > 5)) ||
-                    (i == 2 && (j == 0 || j == 8)))
+                if ((i == 0 && j != 4)
+                    || (i == 1 && (j < 3 || j > 5))
+                    || (i == 2 && (j == 0 || j == 8)))
                 {
                     mainGameSpot.add(new JLabel(""));
                 } else if (i % 2 == 0 && j % 2 == 0)
@@ -111,6 +111,35 @@ public class GameFrame extends JFrame {
                 }
             }
         }
+    }
+
+    private void updateBoard(int from, int to) {
+        int jumped = (from + to) / 2;
+        pegSpots[from - 1].setSelected(false);
+        pegSpots[jumped - 1].setSelected(false);
+        pegSpots[to - 1].setSelected(true);
+        updateDropdown();
+    }
+
+    private void updateDropdown() {
+        pegFrom.removeAllItems();
+        pegTo.removeAllItems();
+        for (int i = 0; i < 15; i++)
+        {
+            if (pegSpots[i].isSelected())
+            {
+                pegFrom.addItem(i + 1);
+            }
+        }
+
+        for (int i = 0; i < 15; i++)
+        {
+            if (!pegSpots[i].isSelected())
+            {
+                pegTo.addItem(i + 1);
+            }
+        }
+
     }
 
     public static void main(String[] args) {
