@@ -28,6 +28,7 @@ public class TriangleBoard {
         for (int i = 0; i < pegs.length; i++) {
             pegs[i] = i != startingIndex;
         }
+        // this is unnecessary once the forest is built with all 15 existing trees
         this.tree = new TriangleBoardTree(this);
         bestSolutionPossible = getBestSolutions().size() != 0;
     }
