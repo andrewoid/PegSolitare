@@ -1,6 +1,7 @@
-package touro.tree;
+package touro.game;
 
 import touro.peg.TriangleBoard;
+import touro.tree.TriangleBoardTree;
 
 public class PossibleBoardTrees {
     private final TriangleBoardTree[] allGameBoards = new TriangleBoardTree[15];

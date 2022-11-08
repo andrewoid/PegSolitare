@@ -1,6 +1,8 @@
-package touro.tree;
+package touro.game;
 
 import org.junit.jupiter.api.Test;
+import touro.game.PossibleBoardTrees;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PossibleBoardTreesTest {
