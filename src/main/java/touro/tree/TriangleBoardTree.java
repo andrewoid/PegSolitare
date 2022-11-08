@@ -18,8 +18,6 @@ public class TriangleBoardTree {
      * The child is added to the parent node's list of children.
      *
      * This is called recursively until no other moves can be made.
-     * TODO: or until it is determined that no solution will be
-     *  found for the current state of the board
      *
      * When there are no more possible moves, the current node is added to the leaves list.
      * A leaf's board with one peg is a winning board
