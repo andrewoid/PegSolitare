@@ -18,7 +18,7 @@ class PlayMoveTest {
         //given
 
         //when
-        play.move(new Move(3,1,0));
+        play.move(new Move(3,1,0), factory.legalMoves);
 
         //then
         assertTrue(board.getPegs()[0]);
@@ -31,7 +31,7 @@ class PlayMoveTest {
         //given
 
         //when
-        play.move(new Move(4,1,0));
+        play.move(new Move(4,1,0), factory.legalMoves);
 
         //then
         assertFalse(board.getPegs()[0]);
@@ -50,8 +50,8 @@ class PlayMoveTest {
         Move invalidMove = new Move(3,1,0);
 
         //when
-        boolean valid = play.isValidMove(validMove);
-        boolean invalid = play.isValidMove(invalidMove);
+        boolean valid = play.isValidMove(validMove, factory.legalMoves);
+        boolean invalid = play.isValidMove(invalidMove, factory.legalMoves);
 
         //then
         assertTrue(valid);
@@ -66,9 +66,9 @@ class PlayMoveTest {
         Move invalidMove2 = new Move(0,1,3);
 
         //when
-        boolean valid = play.isValidMove(validMove);
-        boolean invalid = play.isValidMove(invalidMove);
-        boolean invalid2 = play.isValidMove(invalidMove2);
+        boolean valid = play.isValidMove(validMove, factory.legalMoves);
+        boolean invalid = play.isValidMove(invalidMove, factory.legalMoves);
+        boolean invalid2 = play.isValidMove(invalidMove2, factory.legalMoves);
 
         //then
         assertTrue(valid);

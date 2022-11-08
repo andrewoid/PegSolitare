@@ -1,5 +1,6 @@
 package touro.tree;
 
+import touro.peg.LegalMovesFactory;
 import touro.peg.Move;
 import touro.peg.TriangleBoard;
 
@@ -23,7 +24,7 @@ public class TriangleBoardTree {
      * A leaf's board with one peg is a winning board
      */
     private List<TriangleTreeNode> leaves;
-
+    private List<Move> legalMoves = new LegalMovesFactory().legalMoves;
 
     class TriangleTreeNode {
         TriangleBoard triangleBoard;
@@ -59,10 +60,10 @@ public class TriangleBoardTree {
     }
 
     private void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board) {
-        for (Move legalMove : board.getPlayMove().getLegalMoves()) {
-            if (board.getPlayMove().isValidMove(legalMove)) {
+        for (Move legalMove : legalMoves) {
+            if (board.getPlayMove().isValidMove(legalMove, legalMoves)) {
                 TriangleBoard copyBoard = new TriangleBoard(board.getPegs());
-                copyBoard.getPlayMove().move(legalMove);
+                copyBoard.getPlayMove().move(legalMove, legalMoves);
                 TriangleTreeNode newTriangleTreeNode
                         = new TriangleTreeNode(copyBoard, node, legalMove);
                 node.children.add(newTriangleTreeNode);

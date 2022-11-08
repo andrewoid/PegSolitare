@@ -7,28 +7,21 @@ import java.util.List;
 public class PlayMove {
 
     private TriangleBoard board;
-    private List<Move> legalMoves;
-
 
     public PlayMove(TriangleBoard board) {
         this.board = board;
-        this.legalMoves = new LegalMovesFactory().legalMoves;;
     }
 
-    public List<Move> getLegalMoves() {
-        return legalMoves;
-    }
-
-    public void move(Move move) {
-        if (isValidMove(move)) {
+    public void move(Move move, List<Move> legalMoves) {
+        if (isValidMove(move, legalMoves)) {
             board.setPeg(move.getIndexFrom(), false);
             board.setPeg(move.getIndexRemove(), false);
             board.setPeg(move.getIndexTo(), true);
         }
     }
 
-    public boolean isValidMove(Move move) {
-        return isPossible(move) && this.legalMoves.contains(move);
+    public boolean isValidMove(Move move, List<Move> legalMoves) {
+        return isPossible(move) && legalMoves.contains(move);
     }
 
     private boolean isPossible(Move move) {
