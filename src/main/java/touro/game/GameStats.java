@@ -12,8 +12,6 @@ public class GameStats {
     public GameStats(TriangleBoardTree triangleBoardTree) {
         this.triangleBoardTree = triangleBoardTree;
     }
-
-    //position = node or board? basically, does a position include how it got there
     public List<TriangleBoard> getWinningPositions() {
         return calculateWinningPositions();
     }
@@ -30,7 +28,6 @@ public class GameStats {
         return triangleBoardTree.getUniqueBoards();
     }
 
-    //should this be including positions that can't win, not just already lost positions?
     private List<TriangleBoard> calculateLosingPositions() {
         List<TriangleBoard> losingPositions = new ArrayList<>();
 
@@ -42,7 +39,6 @@ public class GameStats {
         return losingPositions;
     }
 
-    //or should these include potential winning positions
     private List<TriangleBoard> calculateWinningPositions() {
         List<TriangleBoard> winningPositions = new ArrayList<>();
 

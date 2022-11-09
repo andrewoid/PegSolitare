@@ -151,12 +151,4 @@ public class TriangleBoard {
         return isWin() && pegs[startingIndex];
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TriangleBoard that = (TriangleBoard) o;
-        return Arrays.equals(pegs, that.pegs);
-    }
-
 }

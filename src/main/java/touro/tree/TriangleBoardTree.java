@@ -15,7 +15,6 @@ public class TriangleBoardTree {
      * For every possible next move, a child of the current node is created containing
      *   1. the current state of the board,
      *   2. and move
-     * The child is added to the parent node's list of children.
      *
      * This is called recursively until no other moves can be made.
      *
@@ -90,14 +89,13 @@ public class TriangleBoardTree {
                         = new TriangleTreeNode(copyBoard, legalMove);
                 node.children.add(newTriangleTreeNode);
                 treeNodes.add(newTriangleTreeNode);
-                //if copyBoard already exists, reference new node to existing board-node children and board
+
                 //TODO: use code from other PR to find the (first) node corresponding to a given board
                 TriangleTreeNode foundEqualNode = findNodeForBoard(copyBoard);
                 if(foundEqualNode != null){
                     newTriangleTreeNode.children = foundEqualNode.children;
                     newTriangleTreeNode.triangleBoard = foundEqualNode.triangleBoard;
                 }
-                //else add copyBoard to list of boards and continue creating tree
                 else{
                     uniqueBoards.add(copyBoard);
                     createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
@@ -111,7 +109,7 @@ public class TriangleBoardTree {
 
     private TriangleTreeNode findNodeForBoard(TriangleBoard copyBoard) {
         for (TriangleBoard uniqueBoard: uniqueBoards) {
-            if(copyBoard.equals(uniqueBoard)){
+            if(copyBoard.equalsBoard(uniqueBoard)){
                 return getNodeFromBoard(uniqueBoard);
             }
         }
@@ -120,7 +118,7 @@ public class TriangleBoardTree {
 
     private TriangleTreeNode getNodeFromBoard(TriangleBoard triangleBoard) {
         for(TriangleTreeNode treeNode: treeNodes){
-            if(triangleBoard.equals(treeNode.triangleBoard)){
+            if(triangleBoard.equalsBoard(treeNode.triangleBoard)){
                 return treeNode;
             }
         }
