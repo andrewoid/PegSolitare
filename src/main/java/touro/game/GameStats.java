@@ -12,6 +12,7 @@ public class GameStats {
     public GameStats(TriangleBoardTree triangleBoardTree) {
         this.triangleBoardTree = triangleBoardTree;
     }
+
     public List<TriangleBoard> getWinningPositions() {
         return calculateWinningPositions();
     }
@@ -31,8 +32,8 @@ public class GameStats {
     private List<TriangleBoard> calculateLosingPositions() {
         List<TriangleBoard> losingPositions = new ArrayList<>();
 
-        for (TriangleBoardTree.TriangleTreeNode node: triangleBoardTree.getLeaves()){
-            if(!node.getTriangleBoard().isWin()){
+        for (TriangleBoardTree.TriangleTreeNode node : triangleBoardTree.getLeaves()) {
+            if (!node.getTriangleBoard().isWin()) {
                 losingPositions.add(node.getTriangleBoard());
             }
         }

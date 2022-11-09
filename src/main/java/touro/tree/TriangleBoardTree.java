@@ -43,6 +43,7 @@ public class TriangleBoardTree {
         public TriangleBoard getTriangleBoard() {
             return triangleBoard;
         }
+
         public List<TriangleTreeNode> getChildren() {
             return children;
         }
@@ -70,12 +71,15 @@ public class TriangleBoardTree {
     public TriangleTreeNode getRootNode() {
         return rootNode;
     }
+
     public List<TriangleBoard> getUniqueBoards() {
         return uniqueBoards;
     }
+
     public List<TriangleTreeNode> getTreeNodes() {
         return treeNodes;
     }
+
     public List<TriangleTreeNode> getLeaves() {
         return leaves;
     }
@@ -92,11 +96,10 @@ public class TriangleBoardTree {
 
                 //TODO: use code from other PR to find the (first) node corresponding to a given board
                 TriangleTreeNode foundEqualNode = findNodeForBoard(copyBoard);
-                if(foundEqualNode != null){
+                if (foundEqualNode != null) {
                     newTriangleTreeNode.children = foundEqualNode.children;
                     newTriangleTreeNode.triangleBoard = foundEqualNode.triangleBoard;
-                }
-                else{
+                } else {
                     uniqueBoards.add(copyBoard);
                     createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
                 }
@@ -108,8 +111,8 @@ public class TriangleBoardTree {
     }
 
     private TriangleTreeNode findNodeForBoard(TriangleBoard copyBoard) {
-        for (TriangleBoard uniqueBoard: uniqueBoards) {
-            if(copyBoard.equalsBoard(uniqueBoard)){
+        for (TriangleBoard uniqueBoard : uniqueBoards) {
+            if (copyBoard.equalsBoard(uniqueBoard)) {
                 return getNodeFromBoard(uniqueBoard);
             }
         }
@@ -117,8 +120,8 @@ public class TriangleBoardTree {
     }
 
     private TriangleTreeNode getNodeFromBoard(TriangleBoard triangleBoard) {
-        for(TriangleTreeNode treeNode: treeNodes){
-            if(triangleBoard.equalsBoard(treeNode.triangleBoard)){
+        for (TriangleTreeNode treeNode : treeNodes) {
+            if (triangleBoard.equalsBoard(treeNode.triangleBoard)) {
                 return treeNode;
             }
         }

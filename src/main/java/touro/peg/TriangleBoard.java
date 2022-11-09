@@ -7,7 +7,6 @@ import java.util.Arrays;
 public class TriangleBoard {
     private boolean[] pegs = new boolean[15];
     private int startingIndex;
-
     private PlayMove playMove;
 
     public TriangleBoard(int startingIndex) {
