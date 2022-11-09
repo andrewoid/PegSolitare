@@ -71,6 +71,18 @@ public class TriangleBoard {
         return equivalentBoards;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof TriangleBoard)
+        {
+            return equalsBoard((TriangleBoard) other);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public boolean equalsBoard(TriangleBoard board) {
         if (Arrays.equals(pegs, board.pegs)) {
             return true;

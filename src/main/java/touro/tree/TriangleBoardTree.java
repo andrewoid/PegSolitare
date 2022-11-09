@@ -64,12 +64,15 @@ public class TriangleBoardTree {
         return leaves;
     }
 
+    public HashMap<TriangleBoard, TriangleTreeNode> getFound() {
+        return found;
+    }
+
     private void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board) {
         for (Move legalMove : board.getPlayMove().getLegalMoves()) {
             if (board.getPlayMove().isValidMove(legalMove)) {
                 TriangleBoard copyBoard = new TriangleBoard(board.getPegs());
                 copyBoard.getPlayMove().move(legalMove);
-
 
                 TriangleTreeNode newTriangleTreeNode = findExistingBoard(copyBoard);
                 boolean shouldCreate = false;
