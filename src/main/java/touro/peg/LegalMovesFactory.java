@@ -47,7 +47,8 @@ public class LegalMovesFactory {
                 new Move(5, 8, 12),
                 new Move(12, 8, 5),
                 new Move(5, 9, 14),
-                new Move(14, 9, 5));
+                new Move(14, 9, 5),
+                new Move(5, 2, 0));
         return legalMoves;
     }
 }
