@@ -50,7 +50,8 @@ class TriangleBoardTreeTest {
 
         //when
         TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
-        List<TriangleBoardTree.TriangleTreeNode> children = triangleBoardTree.getRootNode().getChildren();
+        List<TriangleBoardTree.TriangleTreeNode> children
+                = triangleBoardTree.getRootNode().getChildren();
 
         //then
         assertEquals(2, children.size());
