@@ -73,12 +73,9 @@ public class TriangleBoard {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof TriangleBoard)
-        {
+        if (other instanceof TriangleBoard) {
             return equalsBoard((TriangleBoard) other);
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
