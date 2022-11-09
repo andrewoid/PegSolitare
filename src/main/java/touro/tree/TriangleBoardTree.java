@@ -94,7 +94,8 @@ public class TriangleBoardTree {
                 node.children.add(newTriangleTreeNode);
                 treeNodes.add(newTriangleTreeNode);
 
-                //TODO: use code from other PR to find the (first) node corresponding to a given board
+                //TODO: use code from other PR to find the (first) node corresponding
+                // to a given board
                 TriangleTreeNode foundEqualNode = findNodeForBoard(copyBoard);
                 if (foundEqualNode != null) {
                     newTriangleTreeNode.children = foundEqualNode.children;

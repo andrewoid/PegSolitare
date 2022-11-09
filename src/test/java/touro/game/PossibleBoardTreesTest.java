@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class PossibleBoardTreesTest {
 
     @Test
-    public void constructor(){
+    public void constructor() {
         //given
         PossibleBoardTrees possibleBoardTrees = new PossibleBoardTrees();
 

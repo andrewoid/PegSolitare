@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class GameStatsTest {
 
     @Test
-    public void getWinningPositions(){
+    public void getWinningPositions() {
         //given
         GameStats stats = new GameStats(new TriangleBoardTree(new TriangleBoard(0)));
 
