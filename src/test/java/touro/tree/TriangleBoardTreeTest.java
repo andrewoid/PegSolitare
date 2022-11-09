@@ -35,10 +35,10 @@ class TriangleBoardTreeTest {
         //then
         // check if 1st index in getLeaves() list's board == expected board
         String expected = """
-                    1
+                    0
                    0 0
                   0 0 0
-                 0 0 0 0
+                 1 0 0 0
                 0 0 0 0 0""";
         assertEquals(expected, triangleBoardTree.getLeaves().get(0).triangleBoard.toString());
     }
