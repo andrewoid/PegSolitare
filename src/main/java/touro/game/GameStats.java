@@ -10,6 +10,7 @@ public class GameStats {
         this.triangleBoardTree = triangleBoardTree;
     }
 
+    //position = node or board? basically, does a position include how it got there
     public TriangleBoard[] getWinningPositions() {
         return calculateWinningPositions();
     }

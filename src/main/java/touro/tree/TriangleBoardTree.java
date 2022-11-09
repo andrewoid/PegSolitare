@@ -25,18 +25,21 @@ public class TriangleBoardTree {
      */
     private List<TriangleTreeNode> leaves;
     private List<Move> legalMoves = new LegalMovesFactory().legalMoves;
+    private TriangleTreeNode rootNode;
 
     class TriangleTreeNode {
         TriangleBoard triangleBoard;
-        private TriangleTreeNode parent;
         private Move move;
         private List<TriangleTreeNode> children;
 
-        public TriangleTreeNode(TriangleBoard triangleBoard, TriangleTreeNode parent, Move move) {
+        public TriangleTreeNode(TriangleBoard triangleBoard, Move move) {
             this.triangleBoard = triangleBoard;
-            this.parent = parent;
             this.move = move;
             this.children = new ArrayList<>();
+        }
+
+        public List<TriangleTreeNode> getChildren() {
+            return children;
         }
 
         @Override
@@ -49,12 +52,15 @@ public class TriangleBoardTree {
     }
 
     public TriangleBoardTree(TriangleBoard board) {
-        TriangleTreeNode rootNode = new TriangleTreeNode(board, null, null);
+        this.rootNode = new TriangleTreeNode(board, null);
         this.leaves = new ArrayList<>();
 
-        createTreeAndStoreLeaves(rootNode, board);
+        createTreeAndStoreLeaves(this.rootNode, board);
     }
 
+    public TriangleTreeNode getRootNode() {
+        return rootNode;
+    }
     public List<TriangleTreeNode> getLeaves() {
         return leaves;
     }
@@ -65,8 +71,11 @@ public class TriangleBoardTree {
                 TriangleBoard copyBoard = new TriangleBoard(board.getPegs());
                 copyBoard.getPlayMove().move(legalMove, legalMoves);
                 TriangleTreeNode newTriangleTreeNode
-                        = new TriangleTreeNode(copyBoard, node, legalMove);
+                        = new TriangleTreeNode(copyBoard, legalMove);
                 node.children.add(newTriangleTreeNode);
+                //add copyBoard to boards list
+                //if copyboard already exists, end if statement here.
+                //find existent board and reference its children?? or does that defeat the purpose
                 createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
             }
         }
@@ -77,17 +86,17 @@ public class TriangleBoardTree {
 
     /*  Given a TriangleTreeNode,
         this method returns a List of TriangleTreeNodes that resulted in the given node */
-    public List<TriangleTreeNode> getSequenceToNode(TriangleTreeNode treeNode) {
-        TriangleTreeNode node = treeNode;
-        List<TriangleTreeNode> listOfMovesToNode = new ArrayList<>();
-        listOfMovesToNode.add(node);
-        while (node.parent != null) {
-            node = node.parent;
-            listOfMovesToNode.add(0, node);
-        }
-        return listOfMovesToNode;
-
-    }
+//    public List<TriangleTreeNode> getSequenceToNode(TriangleTreeNode treeNode) {
+//        TriangleTreeNode node = treeNode;
+//        List<TriangleTreeNode> listOfMovesToNode = new ArrayList<>();
+//        listOfMovesToNode.add(node);
+//        while (node.parent != null) {
+//            node = node.parent;
+//            listOfMovesToNode.add(0, node);
+//        }
+//        return listOfMovesToNode;
+//
+//    }
 }
 
 
