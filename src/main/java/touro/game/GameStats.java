@@ -3,35 +3,54 @@ package touro.game;
 import touro.peg.TriangleBoard;
 import touro.tree.TriangleBoardTree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameStats {
-    private TriangleBoardTree triangleBoardTree;
+    private final TriangleBoardTree triangleBoardTree;
 
     public GameStats(TriangleBoardTree triangleBoardTree) {
         this.triangleBoardTree = triangleBoardTree;
     }
 
     //position = node or board? basically, does a position include how it got there
-    public TriangleBoard[] getWinningPositions() {
+    public List<TriangleBoard> getWinningPositions() {
         return calculateWinningPositions();
     }
 
-    public TriangleBoard[] getLosingPositions() {
+    public List<TriangleBoard> getLosingPositions() {
         return calculateLosingPositions();
     }
 
-    public TriangleBoard[] getUniquePositions() {
+    public List<TriangleBoard> getUniquePositions() {
         return calculateUniquePositions();
     }
 
-    private TriangleBoard[] calculateUniquePositions() {
-        return new TriangleBoard[0];
+    private List<TriangleBoard> calculateUniquePositions() {
+        return triangleBoardTree.getUniqueBoards();
     }
 
-    private TriangleBoard[] calculateLosingPositions() {
-        return new TriangleBoard[0];
+    //should this be including positions that can't win, not just already lost positions?
+    private List<TriangleBoard> calculateLosingPositions() {
+        List<TriangleBoard> losingPositions = new ArrayList<>();
+
+        for (TriangleBoardTree.TriangleTreeNode node: triangleBoardTree.getLeaves()){
+            if(!node.getTriangleBoard().isWin()){
+                losingPositions.add(node.getTriangleBoard());
+            }
+        }
+        return losingPositions;
     }
 
-    private TriangleBoard[] calculateWinningPositions() {
-        return new TriangleBoard[0];
+    //or should these include potential winning positions
+    private List<TriangleBoard> calculateWinningPositions() {
+        List<TriangleBoard> winningPositions = new ArrayList<>();
+
+        for (TriangleBoardTree.TriangleTreeNode node : triangleBoardTree.getLeaves()) {
+            if (node.getTriangleBoard().isWin()) {
+                winningPositions.add(node.getTriangleBoard());
+            }
+        }
+        return winningPositions;
     }
 }

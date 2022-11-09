@@ -30,7 +30,7 @@ public class TriangleBoardTree {
     //TODO: possibly delete after find corresponding node for board method is created
     private List<TriangleTreeNode> treeNodes = new ArrayList<>();
 
-    class TriangleTreeNode {
+    public class TriangleTreeNode {
         TriangleBoard triangleBoard;
         private Move move;
         private List<TriangleTreeNode> children;
@@ -41,6 +41,9 @@ public class TriangleBoardTree {
             this.children = new ArrayList<>();
         }
 
+        public TriangleBoard getTriangleBoard() {
+            return triangleBoard;
+        }
         public List<TriangleTreeNode> getChildren() {
             return children;
         }
@@ -70,6 +73,9 @@ public class TriangleBoardTree {
     }
     public List<TriangleBoard> getUniqueBoards() {
         return uniqueBoards;
+    }
+    public List<TriangleTreeNode> getTreeNodes() {
+        return treeNodes;
     }
     public List<TriangleTreeNode> getLeaves() {
         return leaves;
