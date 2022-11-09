@@ -53,7 +53,7 @@ public class TriangleBoard {
         return pegs[index] ? 1 : 0;
     }
 
-    public boolean IsBestSolutionPossible()
+    public boolean isBestSolutionPossible()
     {
         return bestSolutionPossible;
     }
