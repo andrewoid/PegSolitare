@@ -29,7 +29,7 @@ public class GameFrame extends JFrame {
         playMove = new PlayMove(new TriangleBoard(0), legalMovesFactory.getLegalMovesList());
 
         pegSpots = new JRadioButton[15];
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < pegSpots.length; i++)
         {
             JRadioButton spot = new JRadioButton((i + 1) + "", playMove.getBoard().hasPeg(i));
             spot.setEnabled(false);
@@ -39,7 +39,7 @@ public class GameFrame extends JFrame {
         displayBoard();
 
         pegFrom = new JComboBox();
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < pegSpots.length; i++)
         {
             if (pegSpots[i].isSelected())
             {
@@ -49,7 +49,7 @@ public class GameFrame extends JFrame {
         makeMove.add(pegFrom);
 
         pegTo = new JComboBox();
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < pegSpots.length; i++)
         {
             if (!pegSpots[i].isSelected())
             {
@@ -124,7 +124,7 @@ public class GameFrame extends JFrame {
     private void updateDropdown() {
         pegFrom.removeAllItems();
         pegTo.removeAllItems();
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < pegSpots.length; i++)
         {
             if (pegSpots[i].isSelected())
             {
@@ -132,7 +132,7 @@ public class GameFrame extends JFrame {
             }
         }
 
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < pegSpots.length; i++)
         {
             if (!pegSpots[i].isSelected())
             {
