@@ -17,5 +17,6 @@ class PossibleBoardTreesTest {
 
         //then
         assertEquals(15, possibleBoardTrees.getAllGameBoards().length);
+        
     }
 }
