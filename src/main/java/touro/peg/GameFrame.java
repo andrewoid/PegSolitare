@@ -26,12 +26,14 @@ public class GameFrame extends JFrame {
         add(makeMove);
 
         legalMovesFactory = new LegalMovesFactory();
-        playMove = new PlayMove(new TriangleBoard(0), legalMovesFactory.getLegalMovesList());
+        playMove = new PlayMove(new TriangleBoard(0), legalMovesFactory.legalMoves);
 
         pegSpots = new JRadioButton[15];
         for (int i = 0; i < pegSpots.length; i++)
         {
-            JRadioButton spot = new JRadioButton((i + 1) + "", playMove.getBoard().hasPeg(i));
+            JRadioButton spot = new JRadioButton(
+                    String.valueOf(i + 1),
+                    playMove.getBoard().hasPeg(i));
             spot.setEnabled(false);
             pegSpots[i] = spot;
         }
