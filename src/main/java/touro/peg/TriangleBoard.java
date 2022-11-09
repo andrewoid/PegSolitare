@@ -1,8 +1,6 @@
 package touro.peg;
 
 
-import touro.tree.BoardSolutionChecker;
-
 import java.util.List;
 import java.util.Arrays;
 

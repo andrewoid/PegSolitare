@@ -1,7 +1,7 @@
-package touro.tree;
+package touro.peg;
 
 import org.junit.jupiter.api.Test;
-import touro.peg.TriangleBoard;
+import touro.tree.TriangleBoardTree;
 
 import java.util.ArrayList;
 import java.util.List;

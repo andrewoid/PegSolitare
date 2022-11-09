@@ -1,6 +1,7 @@
-package touro.tree;
+package touro.peg;
 
 import touro.peg.TriangleBoard;
+import touro.tree.TriangleBoardTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,10 +9,8 @@ import java.util.List;
 public class BoardSolutionChecker
 {
     private TriangleBoardTree tree;
-    private TriangleBoard board;
     public BoardSolutionChecker(TriangleBoard board)
     {
-        this.board = board;
         this.tree = new TriangleBoardTree(board);
     }
 
@@ -72,7 +71,7 @@ public class BoardSolutionChecker
     public boolean contains(List<TriangleBoard> boards, TriangleBoard board)
     {
         // temporary method until recursion gets optimized
-        // so as not to store a whole bunch of the same leaves
+        // so as not to store a bunch of the same leaves
         for (TriangleBoard triangleBoard : boards)
         {
             if (triangleBoard.equalsBoard(board))
