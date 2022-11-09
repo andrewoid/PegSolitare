@@ -14,8 +14,7 @@ public class TriangleBoardTree {
      * A root node is created with the given board only.
      * For every possible next move, a child of the current node is created containing
      *   1. the current state of the board,
-     *   2. it's parent,
-     *   3. and move
+     *   2. and move
      * The child is added to the parent node's list of children.
      *
      * This is called recursively until no other moves can be made.
@@ -26,6 +25,10 @@ public class TriangleBoardTree {
     private List<TriangleTreeNode> leaves;
     private List<Move> legalMoves = new LegalMovesFactory().legalMoves;
     private TriangleTreeNode rootNode;
+    private List<TriangleBoard> uniqueBoards = new ArrayList<>();
+
+    //TODO: possibly delete after find corresponding node for board method is created
+    private List<TriangleTreeNode> treeNodes = new ArrayList<>();
 
     class TriangleTreeNode {
         TriangleBoard triangleBoard;
@@ -55,11 +58,18 @@ public class TriangleBoardTree {
         this.rootNode = new TriangleTreeNode(board, null);
         this.leaves = new ArrayList<>();
 
+        //TODO: possibly delete after find corresponding node for board method is created
+        treeNodes.add(rootNode);
+
+        uniqueBoards.add(board);
         createTreeAndStoreLeaves(this.rootNode, board);
     }
 
     public TriangleTreeNode getRootNode() {
         return rootNode;
+    }
+    public List<TriangleBoard> getUniqueBoards() {
+        return uniqueBoards;
     }
     public List<TriangleTreeNode> getLeaves() {
         return leaves;
@@ -73,10 +83,19 @@ public class TriangleBoardTree {
                 TriangleTreeNode newTriangleTreeNode
                         = new TriangleTreeNode(copyBoard, legalMove);
                 node.children.add(newTriangleTreeNode);
-                //add copyBoard to boards list
-                //if copyboard already exists, end if statement here.
-                //find existent board and reference its children?? or does that defeat the purpose
-                createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
+                treeNodes.add(newTriangleTreeNode);
+                //if copyBoard already exists, reference new node to existing board-node children and board
+                //TODO: use code from other PR to find the (first) node corresponding to a given board
+                TriangleTreeNode foundEqualNode = findNodeForBoard(copyBoard);
+                if(foundEqualNode != null){
+                    newTriangleTreeNode.children = foundEqualNode.children;
+                    newTriangleTreeNode.triangleBoard = foundEqualNode.triangleBoard;
+                }
+                //else add copyBoard to list of boards and continue creating tree
+                else{
+                    uniqueBoards.add(copyBoard);
+                    createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
+                }
             }
         }
         if (node.children.size() == 0) {
@@ -84,19 +103,23 @@ public class TriangleBoardTree {
         }
     }
 
-    /*  Given a TriangleTreeNode,
-        this method returns a List of TriangleTreeNodes that resulted in the given node */
-//    public List<TriangleTreeNode> getSequenceToNode(TriangleTreeNode treeNode) {
-//        TriangleTreeNode node = treeNode;
-//        List<TriangleTreeNode> listOfMovesToNode = new ArrayList<>();
-//        listOfMovesToNode.add(node);
-//        while (node.parent != null) {
-//            node = node.parent;
-//            listOfMovesToNode.add(0, node);
-//        }
-//        return listOfMovesToNode;
-//
-//    }
+    private TriangleTreeNode findNodeForBoard(TriangleBoard copyBoard) {
+        for (TriangleBoard uniqueBoard: uniqueBoards) {
+            if(copyBoard.equals(uniqueBoard)){
+                return getNodeFromBoard(uniqueBoard);
+            }
+        }
+        return null;
+    }
+
+    private TriangleTreeNode getNodeFromBoard(TriangleBoard triangleBoard) {
+        for(TriangleTreeNode treeNode: treeNodes){
+            if(triangleBoard.equals(treeNode.triangleBoard)){
+                return treeNode;
+            }
+        }
+        return null;
+    }
 }
 
 
