@@ -25,13 +25,15 @@ public class TriangleBoardTree {
      * A leaf's board with one peg is a winning board
      */
     private List<TriangleTreeNode> leaves;
+    private TriangleBoard board;
 
+    TriangleTreeNode rootNode;
 
     class TriangleTreeNode {
         TriangleBoard triangleBoard;
         private TriangleTreeNode parent;
         private Move move;
-        private List<TriangleTreeNode> children;
+        List<TriangleTreeNode> children;
 
         public TriangleTreeNode(TriangleBoard triangleBoard, TriangleTreeNode parent, Move move) {
             this.triangleBoard = triangleBoard;
@@ -50,7 +52,8 @@ public class TriangleBoardTree {
     }
 
     public TriangleBoardTree(TriangleBoard board) {
-        TriangleTreeNode rootNode = new TriangleTreeNode(board, null, null);
+        this.board = board;
+        rootNode = new TriangleTreeNode(board, null, null);
         this.leaves = new ArrayList<>();
 
         createTreeAndStoreLeaves(rootNode, board);
