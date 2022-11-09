@@ -59,7 +59,7 @@ public class TriangleBoard {
         return pegs[index] ? 1 : 0;
     }
 
-    public boolean isThereAPossibleBestSolution()
+    public boolean IsBestSolutionPossible()
     {
         return bestSolutionPossible;
     }
@@ -228,7 +228,8 @@ public class TriangleBoard {
 
     public boolean contains(List<TriangleBoard> boards, TriangleBoard board)
     {
-        // temporary method until recursion gets optimized so as not to store a whole bunch of the same leaves
+        // temporary method until recursion gets optimized
+        // so as not to store a whole bunch of the same leaves
         for (TriangleBoard triangleBoard : boards)
         {
             if (triangleBoard.equalsBoard(board))

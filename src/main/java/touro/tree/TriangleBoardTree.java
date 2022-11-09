@@ -65,7 +65,7 @@ public class TriangleBoardTree {
     }
 
     private void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board) {
-        if (board == null){  return; } // avoid merge conflicts by placing this on one line
+        if (board == null) { return; } // avoid merge conflicts by placing this on one line
         for (Move legalMove : board.getPlayMove().getLegalMoves()) {
             if (board.getPlayMove().isValidMove(legalMove)) {
                 TriangleBoard copyBoard = new TriangleBoard(board.getPegs());

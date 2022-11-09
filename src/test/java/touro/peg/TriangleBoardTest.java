@@ -207,7 +207,8 @@ class TriangleBoardTest
         TriangleBoard triangleBoard = new TriangleBoard(0);
 
         // when
-        List<TriangleBoardTree.TriangleTreeNode> firstPath = triangleBoard.getPathsToBestSolutions().get(0);
+        List<TriangleBoardTree.TriangleTreeNode> firstPath
+                = triangleBoard.getPathsToBestSolutions().get(0);
         int numMovesToReachFirst = 14;
 
         // then
