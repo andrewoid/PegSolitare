@@ -1,10 +1,8 @@
 package touro.peg;
 
 import org.junit.jupiter.api.Test;
-import touro.tree.TriangleBoardTree;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
