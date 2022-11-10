@@ -73,10 +73,10 @@ public class TriangleBoardTree {
     private void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board) {
         for (Move legalMove : board.getPlayMove().getLegalMoves()) {
             if (board.getPlayMove().isValidMove(legalMove)) {
-                TriangleBoard copyBoard = new TriangleBoard(board.getPegs(), board.getStartingIndex());
+                TriangleBoard copyBoard = new TriangleBoard(board.getPegs(),
+                                                board.getStartingIndex());
                 copyBoard.getPlayMove().move(legalMove);
 
-//                TriangleTreeNode newTriangleTreeNode = findExistingBoard(copyBoard);
                 TriangleTreeNode newTriangleTreeNode = found.get(copyBoard);
                 if (newTriangleTreeNode == null) {
                     newTriangleTreeNode = new TriangleTreeNode(copyBoard, legalMove);
