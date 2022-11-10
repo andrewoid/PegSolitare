@@ -23,46 +23,20 @@ class TriangleBoardTreeTest
     }
     
     @Test
-    public void constructor()
+    public void contains()
     {
         //given
         boolean[] board = new boolean[]
                 {false, true, false, true, false, false, false,
                         false, false, false, false, false, false, false, false};
 
-        TriangleBoard triangleBoard = new TriangleBoard(board);
-
-        boolean[] testBoard1 = new boolean[]
-                {true, false, false, false, false, false, false,
-                        false, false, false, false, false, false, false, false};
-        TriangleBoard testTriangleBoard1 = new TriangleBoard(testBoard1);
-
-        boolean[] testBoard2 = new boolean[]
-                {false, false, false, false, true, false, false,
-                        false, false, false, false, false, false, false, false};
-        TriangleBoard testTriangleBoard2 = new TriangleBoard(testBoard2);
+        TriangleBoard searchingFor = new TriangleBoard(board, 0);
+        TriangleBoard searchingForNot = new TriangleBoard(board, 1);
+        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(new TriangleBoard(0));
 
         //when
-        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
-
-        Set<TriangleBoard> keyset = triangleBoardTree.getFound().keySet();
-        boolean match1 = keyset.stream().anyMatch(
-                loopBoard -> loopBoard.equals(testTriangleBoard1)
-        );
-        boolean match2 = keyset.stream().anyMatch(
-                loopBoard -> loopBoard.equals(testTriangleBoard2)
-        );
-
         //then
-        // check if 1st index in getLeaves() list's board == expected board
-        String expected = """
-                1
-               0 0
-              0 0 0
-             0 0 0 0
-            0 0 0 0 0""";
-        assertEquals(expected, triangleBoardTree.getLeaves().get(0).triangleBoard.toString());
-        assertTrue(match1);
-        assertFalse(match2);
+        assertTrue(triangleBoardTree.contains(searchingFor));
+        assertFalse(triangleBoardTree.contains(searchingForNot));
     }
 }

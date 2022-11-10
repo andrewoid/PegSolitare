@@ -27,8 +27,10 @@ public class TriangleBoardTree {
      * All boards are added to the found map of boards and nodes, used to avoid recalculating
      * equivalent boards.
      */
+    // TODO: remove move field
     private List<TriangleTreeNode> leaves;
     private HashMap<TriangleBoard, TriangleTreeNode> found;
+    private final TriangleTreeNode rootNode;
 
 
     class TriangleTreeNode {
@@ -52,7 +54,7 @@ public class TriangleBoardTree {
     }
 
     public TriangleBoardTree(TriangleBoard board) {
-        TriangleTreeNode rootNode = new TriangleTreeNode(board, null);
+        rootNode = new TriangleTreeNode(board, null);
         this.leaves = new ArrayList<>();
         this.found = new HashMap<>();
         found.put(board, rootNode);
@@ -71,27 +73,28 @@ public class TriangleBoardTree {
     private void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board) {
         for (Move legalMove : board.getPlayMove().getLegalMoves()) {
             if (board.getPlayMove().isValidMove(legalMove)) {
-                TriangleBoard copyBoard = new TriangleBoard(board.getPegs());
+                TriangleBoard copyBoard = new TriangleBoard(board.getPegs(), board.getStartingIndex());
                 copyBoard.getPlayMove().move(legalMove);
 
-                TriangleTreeNode newTriangleTreeNode = findExistingBoard(copyBoard);
-                boolean shouldCreate = false;
+//                TriangleTreeNode newTriangleTreeNode = findExistingBoard(copyBoard);
+                TriangleTreeNode newTriangleTreeNode = found.get(copyBoard);
                 if (newTriangleTreeNode == null) {
                     newTriangleTreeNode = new TriangleTreeNode(copyBoard, legalMove);
-                    shouldCreate = true;
-                }
-
-                node.children.add(newTriangleTreeNode);
-
-                if (shouldCreate) {
                     found.put(copyBoard, newTriangleTreeNode);
                     createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
                 }
+
+                node.children.add(newTriangleTreeNode);
             }
         }
         if (node.children.size() == 0) {
             leaves.add(node);
         }
+    }
+
+    public boolean contains(TriangleBoard board)
+    {
+        return found.get(board) != null;
     }
 
     private TriangleTreeNode findExistingBoard(TriangleBoard copyBoard)
