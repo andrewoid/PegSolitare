@@ -85,6 +85,21 @@ public class GameFrame extends JFrame {
     }
 
     private void displayBoard() {
+        /*
+        Given a 5 x 9 grid:
+        We want to fill it with our RadioButtons in a checkerboard pattern -
+        this means that the spots we fill should have xy coordinates
+        that are either both even or both odd.
+        The exceptions to this are a number of spots in the first three rows -
+        illustrated by the o's in the graph below.
+        o   -   o   -   1   -   o   -   o
+        -   o   -   2   -   3   -   o   -
+        o   -   4   -   5   -   6   -   o
+        -   7   -   8   -   9   -   10  -
+        11  -   12  -   13  -   14  -   15
+        */
+
+        //constructing the graph
         int next = 0;
         for (int i = 0; i < 5; i++)
         {
@@ -94,12 +109,13 @@ public class GameFrame extends JFrame {
                 {
                     break;
                 }
+                //exceptions for first row
                 if ((i == 0 && j != 4)
                     || (i == 1 && (j < 3 || j > 5))
                     || (i == 2 && (j == 0 || j == 8)))
                 {
                     mainGameSpot.add(new JLabel(""));
-                } else if (i % 2 == 0 && j % 2 == 0)
+                } else if (i % 2 == 0 && j % 2 == 0) //checkerboard pattern
                 {
                     mainGameSpot.add(pegSpots[next]);
                     next++;
