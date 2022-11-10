@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BoardSolutionChecker
 {
-    private TriangleBoardTree tree;
+    private final TriangleBoardTree tree;
     public BoardSolutionChecker(TriangleBoard board)
     {
         this.tree = new TriangleBoardTree(board);
@@ -17,10 +17,6 @@ public class BoardSolutionChecker
     public List<TriangleBoard> getSolutions()
     {
         ArrayList<TriangleBoard> solutions = new ArrayList<>();
-        if (tree == null)
-        {
-            return solutions;
-        }
         List<TriangleBoardTree.TriangleTreeNode> leaves = tree.getLeaves();
         for (TriangleBoardTree.TriangleTreeNode node : leaves)
         {
@@ -35,10 +31,6 @@ public class BoardSolutionChecker
     public List<TriangleBoard> getBestSolutions()
     {
         ArrayList<TriangleBoard> bestSolutions = new ArrayList<>();
-        if (tree == null)
-        {
-            return bestSolutions;
-        }
         List<TriangleBoardTree.TriangleTreeNode> leaves = tree.getLeaves();
         for (TriangleBoardTree.TriangleTreeNode node : leaves)
         {
@@ -48,24 +40,6 @@ public class BoardSolutionChecker
             }
         }
         return bestSolutions;
-    }
-
-    public ArrayList<List<TriangleBoardTree.TriangleTreeNode>> getPathsToBestSolutions()
-    {
-        ArrayList<List<TriangleBoardTree.TriangleTreeNode>> paths = new ArrayList<>();
-        if (tree == null)
-        {
-            return paths;
-        }
-        List<TriangleBoardTree.TriangleTreeNode> leaves = tree.getLeaves();
-        for (TriangleBoardTree.TriangleTreeNode node : leaves)
-        {
-            if (node.getTriangleBoard().isBestWin())
-            {
-                paths.add(tree.getSequenceToNode(node));
-            }
-        }
-        return paths;
     }
 
     public boolean contains(List<TriangleBoard> boards, TriangleBoard board)

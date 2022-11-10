@@ -71,21 +71,4 @@ class BoardSolutionCheckerTest
                 """;
         assertEquals(expected, bestSolutions.toString());
     }
-
-    @Test
-    public void pathToBestSolutions()
-    {
-        // given
-        TriangleBoard triangleBoard = new TriangleBoard(0);
-        BoardSolutionChecker checker = new BoardSolutionChecker(triangleBoard);
-
-        // when
-        List<TriangleBoardTree.TriangleTreeNode> firstPath
-                = checker.getPathsToBestSolutions().get(0);
-        int numMovesToReachFirst = 14;
-
-        // then
-        //System.out.println(firstPath);
-        assertEquals(numMovesToReachFirst, firstPath.size()); // expected, actual
-    }
 }
