@@ -25,10 +25,15 @@ public class Move {
 
     @Override
     public boolean equals(Object otherMove) {
-        if (this == otherMove) return true;
-        if (otherMove == null || getClass() != otherMove.getClass()) return false;
+        if (this == otherMove) {
+            return true;
+        }
+        if (otherMove == null || getClass() != otherMove.getClass()) {
+            return false;
+        }
         Move move = (Move) otherMove;
-        return indexFrom == move.indexFrom && indexRemove == move.indexRemove && indexTo == move.indexTo;
+        return indexFrom == move.indexFrom
+                && indexRemove == move.indexRemove && indexTo == move.indexTo;
     }
 
     @Override

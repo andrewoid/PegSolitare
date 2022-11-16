@@ -1,8 +1,10 @@
 package touro.peg;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class TriangleBoard {
@@ -22,7 +24,8 @@ public class TriangleBoard {
         }
     }
 
-    public TriangleBoard(boolean[] pegs) {
+    public TriangleBoard(boolean[] pegs, int startingIndex) {
+        this.startingIndex = startingIndex;
         this.playMove = new PlayMove(this, legalMoves);
         System.arraycopy(pegs, 0, this.pegs, 0, pegs.length);
     }
@@ -33,6 +36,11 @@ public class TriangleBoard {
 
     public void setPeg(int pegIndex, boolean pegStatus) {
         pegs[pegIndex] = pegStatus;
+    }
+
+    public int getStartingIndex()
+    {
+        return startingIndex;
     }
 
     public PlayMove getPlayMove() {
@@ -53,6 +61,24 @@ public class TriangleBoard {
         System.arraycopy(pegs, 0, triangleBoardCopy.pegs, 0, 15);
         return triangleBoardCopy;
     }
+
+    public ArrayList<TriangleBoard> getEquivalentBoards() {
+        ArrayList<TriangleBoard> equivalentBoards = new ArrayList<>();
+        equivalentBoards.add(this);
+        equivalentBoards.add(new TriangleBoard(flipPegs(pegs), startingIndex));
+
+        boolean[] rotated1 = rotatePegs(pegs);
+        equivalentBoards.add(new TriangleBoard(rotated1, startingIndex));
+        equivalentBoards.add(new TriangleBoard(flipPegs(rotated1), startingIndex));
+
+        boolean[] rotated2 = rotatePegs(rotated1);
+        equivalentBoards.add(new TriangleBoard(rotated2, startingIndex));
+        equivalentBoards.add(new TriangleBoard(flipPegs(rotated2), startingIndex));
+
+        return equivalentBoards;
+    }
+
+
 
     public boolean equalsBoard(TriangleBoard board) {
         if (Arrays.equals(pegs, board.pegs)) {
@@ -155,5 +181,24 @@ public class TriangleBoard {
         return isWin() && pegs[startingIndex];
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        TriangleBoard that = (TriangleBoard) o;
+        return startingIndex == that.startingIndex && Arrays.equals(pegs, that.pegs);
+    }
 
+    @Override
+    public int hashCode()
+    {
+        int result = Objects.hash(startingIndex);
+        result = 31 * result + Arrays.hashCode(pegs);
+        return result;
+    }
 }
