@@ -21,12 +21,12 @@ public class GameStats {
         return calculateLosingPositions();
     }
 
-    public List<TriangleBoard> getUniquePositions() {
+    public int getUniquePositions() {
         return calculateUniquePositions();
     }
 
-    private List<TriangleBoard> calculateUniquePositions() {
-        return triangleBoardTree.getUniqueBoards();
+    private int calculateUniquePositions() {
+        return triangleBoardTree.getFound().size();
     }
 
     private List<TriangleBoard> calculateLosingPositions() {

@@ -5,6 +5,7 @@ import touro.peg.Move;
 import touro.peg.TriangleBoard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -20,15 +21,14 @@ public class TriangleBoardTree {
      *
      * When there are no more possible moves, the current node is added to the leaves list.
      * A leaf's board with one peg is a winning board
+     *
+     * All boards are added to the found map of boards and nodes, used to avoid recalculating
+     * equivalent boards.
      */
     private List<TriangleTreeNode> leaves;
     private List<Move> legalMoves = new LegalMovesFactory().legalMoves;
     private TriangleTreeNode rootNode;
-    private List<TriangleBoard> uniqueBoards = new ArrayList<>();
-
-    //TODO: possibly delete after find corresponding node for board method is created
-    private List<TriangleTreeNode> treeNodes = new ArrayList<>();
-
+    private HashMap<TriangleBoard, TriangleTreeNode> found;
     public class TriangleTreeNode {
         TriangleBoard triangleBoard;
         private Move move;
@@ -60,11 +60,9 @@ public class TriangleBoardTree {
     public TriangleBoardTree(TriangleBoard board) {
         this.rootNode = new TriangleTreeNode(board, null);
         this.leaves = new ArrayList<>();
+        this.found = new HashMap<>();
+        found.put(board, rootNode);
 
-        //TODO: possibly delete after find corresponding node for board method is created
-        treeNodes.add(rootNode);
-
-        uniqueBoards.add(board);
         createTreeAndStoreLeaves(this.rootNode, board);
     }
 
@@ -72,38 +70,30 @@ public class TriangleBoardTree {
         return rootNode;
     }
 
-    public List<TriangleBoard> getUniqueBoards() {
-        return uniqueBoards;
-    }
-
-    public List<TriangleTreeNode> getTreeNodes() {
-        return treeNodes;
-    }
-
     public List<TriangleTreeNode> getLeaves() {
         return leaves;
     }
 
+    public HashMap<TriangleBoard, TriangleTreeNode> getFound() {
+        return found;
+    }
+
     private void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board) {
+
         for (Move legalMove : legalMoves) {
             if (board.getPlayMove().isValidMove(legalMove, legalMoves)) {
-                TriangleBoard copyBoard = new TriangleBoard(board.getPegs());
+                TriangleBoard copyBoard = new TriangleBoard(board.getPegs(),
+                                                board.getStartingIndex());
                 copyBoard.getPlayMove().move(legalMove, legalMoves);
-                TriangleTreeNode newTriangleTreeNode
-                        = new TriangleTreeNode(copyBoard, legalMove);
-                node.children.add(newTriangleTreeNode);
-                treeNodes.add(newTriangleTreeNode);
 
-                //TODO: use code from other PR to find the (first) node corresponding
-                // to a given board
-                TriangleTreeNode foundEqualNode = findNodeForBoard(copyBoard);
-                if (foundEqualNode != null) {
-                    newTriangleTreeNode.children = foundEqualNode.children;
-                    newTriangleTreeNode.triangleBoard = foundEqualNode.triangleBoard;
-                } else {
-                    uniqueBoards.add(copyBoard);
+                TriangleTreeNode newTriangleTreeNode = found.get(copyBoard);
+                if (newTriangleTreeNode == null) {
+                    newTriangleTreeNode = new TriangleTreeNode(copyBoard, legalMove);
+                    found.put(copyBoard, newTriangleTreeNode);
                     createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
                 }
+
+                node.children.add(newTriangleTreeNode);
             }
         }
         if (node.children.size() == 0) {
@@ -111,22 +101,26 @@ public class TriangleBoardTree {
         }
     }
 
-    private TriangleTreeNode findNodeForBoard(TriangleBoard copyBoard) {
-        for (TriangleBoard uniqueBoard : uniqueBoards) {
-            if (copyBoard.equalsBoard(uniqueBoard)) {
-                return getNodeFromBoard(uniqueBoard);
-            }
-        }
-        return null;
+    public boolean contains(TriangleBoard board)
+    {
+        return found.get(board) != null;
     }
 
-    private TriangleTreeNode getNodeFromBoard(TriangleBoard triangleBoard) {
-        for (TriangleTreeNode treeNode : treeNodes) {
-            if (triangleBoard.equalsBoard(treeNode.triangleBoard)) {
-                return treeNode;
+    private TriangleTreeNode findExistingBoard(TriangleBoard copyBoard)
+    {
+        TriangleTreeNode node = null;
+        TriangleTreeNode test;
+
+        for (TriangleBoard board : copyBoard.getEquivalentBoards())
+        {
+            if ((test = found.get(board)) != null)
+            {
+                node = test;
+                break;
             }
         }
-        return null;
+
+        return node;
     }
 }
 
