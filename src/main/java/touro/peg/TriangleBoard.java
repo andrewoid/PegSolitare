@@ -2,23 +2,18 @@ package touro.peg;
 
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
 import java.util.Objects;
 
 
 public class TriangleBoard {
-
-    private static final List<Move>  legalMoves = new LegalMovesFactory().legalMoves;
-
     private boolean[] pegs = new boolean[15];
     private int startingIndex;
-
     private PlayMove playMove;
 
     public TriangleBoard(int startingIndex) {
         this.startingIndex = startingIndex;
-        this.playMove = new PlayMove(this, legalMoves);
+        this.playMove = new PlayMove(this);
         for (int i = 0; i < pegs.length; i++) {
             pegs[i] = i != startingIndex;
         }
@@ -26,7 +21,8 @@ public class TriangleBoard {
 
     public TriangleBoard(boolean[] pegs, int startingIndex) {
         this.startingIndex = startingIndex;
-        this.playMove = new PlayMove(this, legalMoves);
+        this.playMove = new PlayMove(this);
+
         System.arraycopy(pegs, 0, this.pegs, 0, pegs.length);
     }
 

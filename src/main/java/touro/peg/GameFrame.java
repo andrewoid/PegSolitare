@@ -26,7 +26,7 @@ public class GameFrame extends JFrame {
         add(makeMove);
 
         legalMovesFactory = new LegalMovesFactory();
-        playMove = new PlayMove(new TriangleBoard(0), legalMovesFactory.legalMoves);
+        playMove = new PlayMove(new TriangleBoard(0));
 
         pegSpots = new JRadioButton[15];
         for (int i = 0; i < pegSpots.length; i++)
@@ -74,7 +74,10 @@ public class GameFrame extends JFrame {
             selected = pegTo.getSelectedItem();
             int toSpot = Integer.parseInt(String.valueOf(selected));
             int jumped = (fromSpot + toSpot) / 2;
-            playMove.move(new Move(fromSpot - 1, jumped - 1, toSpot - 1));
+            playMove.move(new Move(fromSpot - 1,
+                            jumped - 1,
+                            toSpot - 1),
+                        legalMovesFactory.legalMoves);
             updateBoard(fromSpot, toSpot);
 
         } catch (NumberFormatException e)

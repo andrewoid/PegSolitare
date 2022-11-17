@@ -2,16 +2,12 @@ package touro.tree;
 
 import org.junit.jupiter.api.Test;
 import touro.peg.TriangleBoard;
-
-import java.util.Set;
-
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-class TriangleBoardTreeTest
-{
+class TriangleBoardTreeTest {
     @Test
-    public void constructor_full()
-    {
+    public void constructor_full() {
         //given
         TriangleBoard triangleBoard = new TriangleBoard(0);
 
@@ -21,7 +17,7 @@ class TriangleBoardTreeTest
         //then
         // check if 1st index in getLeaves() list's board == expected board
     }
-    
+
     @Test
     public void contains()
     {
@@ -38,5 +34,19 @@ class TriangleBoardTreeTest
         //then
         assertTrue(triangleBoardTree.contains(searchingFor));
         assertFalse(triangleBoardTree.contains(searchingForNot));
+    }
+
+    @Test
+    public void node_children_size() {
+        //given
+        TriangleBoard triangleBoard = new TriangleBoard(0);
+
+        //when
+        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
+        List<TriangleBoardTree.TriangleTreeNode> children
+                = triangleBoardTree.getRootNode().getChildren();
+
+        //then
+        assertEquals(2, children.size());
     }
 }
