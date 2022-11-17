@@ -1,5 +1,6 @@
 package touro.tree;
 
+import touro.peg.LegalMovesFactory;
 import touro.peg.Move;
 import touro.peg.TriangleBoard;
 
@@ -12,14 +13,11 @@ public class TriangleBoardTree {
     /*
      * A tree is created with a given board in any state.
      * A root node is created with the given board only.
-     * For every possible next move, a child of the current node is created containing:
-     *   1. the current state of the board
-     *   2. its move
-     * The child is added to the parent node's list of children.
+     * For every possible next move, a child of the current node is created containing
+     *   1. the current state of the board,
+     *   2. and move
      *
      * This is called recursively until no other moves can be made.
-     * TODO: or until it is determined that no solution will be
-     *  found for the current state of the board
      *
      * When there are no more possible moves, the current node is added to the leaves list.
      * A leaf's board with one peg is a winning board
@@ -27,13 +25,12 @@ public class TriangleBoardTree {
      * All boards are added to the found map of boards and nodes, used to avoid recalculating
      * equivalent boards.
      */
-    // TODO: remove move field
     private List<TriangleTreeNode> leaves;
+    private List<Move> legalMoves = new LegalMovesFactory().legalMoves;
+    private TriangleTreeNode rootNode;
     private HashMap<TriangleBoard, TriangleTreeNode> found;
-    private final TriangleTreeNode rootNode;
 
-
-    class TriangleTreeNode {
+    public class TriangleTreeNode {
         TriangleBoard triangleBoard;
         private Move move;
         private List<TriangleTreeNode> children;
@@ -42,6 +39,14 @@ public class TriangleBoardTree {
             this.triangleBoard = triangleBoard;
             this.move = move;
             this.children = new ArrayList<>();
+        }
+
+        public TriangleBoard getTriangleBoard() {
+            return triangleBoard;
+        }
+
+        public List<TriangleTreeNode> getChildren() {
+            return children;
         }
 
         @Override
@@ -54,12 +59,16 @@ public class TriangleBoardTree {
     }
 
     public TriangleBoardTree(TriangleBoard board) {
-        rootNode = new TriangleTreeNode(board, null);
+        this.rootNode = new TriangleTreeNode(board, null);
         this.leaves = new ArrayList<>();
         this.found = new HashMap<>();
         found.put(board, rootNode);
 
-        createTreeAndStoreLeaves(rootNode, board);
+        createTreeAndStoreLeaves(this.rootNode, board);
+    }
+
+    public TriangleTreeNode getRootNode() {
+        return rootNode;
     }
 
     public List<TriangleTreeNode> getLeaves() {
@@ -71,11 +80,12 @@ public class TriangleBoardTree {
     }
 
     private void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board) {
-        for (Move legalMove : board.getPlayMove().getLegalMoves()) {
-            if (board.getPlayMove().isValidMove(legalMove)) {
+
+        for (Move legalMove : legalMoves) {
+            if (board.getPlayMove().isValidMove(legalMove, legalMoves)) {
                 TriangleBoard copyBoard = new TriangleBoard(board.getPegs(),
                                                 board.getStartingIndex());
-                copyBoard.getPlayMove().move(legalMove);
+                copyBoard.getPlayMove().move(legalMove, legalMoves);
 
                 TriangleTreeNode newTriangleTreeNode = found.get(copyBoard);
                 if (newTriangleTreeNode == null) {
