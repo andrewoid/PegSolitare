@@ -1,7 +1,6 @@
 package touro.peg;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class PlayMove {
@@ -10,6 +9,11 @@ public class PlayMove {
 
     public PlayMove(TriangleBoard board) {
         this.board = board;
+    }
+
+
+    public TriangleBoard getBoard() {
+        return board;
     }
 
     public void move(Move move, List<Move> legalMoves) {

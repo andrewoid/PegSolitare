@@ -1,6 +1,5 @@
 package touro.peg;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LegalMovesFactory {
