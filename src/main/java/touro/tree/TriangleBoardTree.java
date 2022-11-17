@@ -29,6 +29,7 @@ public class TriangleBoardTree {
     private List<Move> legalMoves = new LegalMovesFactory().legalMoves;
     private TriangleTreeNode rootNode;
     private HashMap<TriangleBoard, TriangleTreeNode> found;
+
     public class TriangleTreeNode {
         TriangleBoard triangleBoard;
         private Move move;

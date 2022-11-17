@@ -25,9 +25,9 @@ public class PlayMove {
     }
 
     private boolean isPossible(Move move) {
-        return board.getPegs()[move.getIndexFrom()] &&
-                board.getPegs()[move.getIndexRemove()] &&
-                !board.getPegs()[move.getIndexTo()];
+        return board.getPegs()[move.getIndexFrom()]
+                && board.getPegs()[move.getIndexRemove()]
+                && !board.getPegs()[move.getIndexTo()];
     }
 
 }
