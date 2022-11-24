@@ -1,15 +1,22 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
 group 'touro.solitare'
 version '1.0-SNAPSHOT'
+
+//// Elastic Beanstalk requires a lower version of Java
+//sourceCompatibility = 1.8
+//targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    compileOnly 'javax.servlet:servlet-api:2.5'
+    implementation 'com.google.code.gson:gson:2.10'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
 }

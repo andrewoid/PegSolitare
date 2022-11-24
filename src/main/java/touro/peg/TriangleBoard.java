@@ -1,6 +1,7 @@
 package touro.peg;
 
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -9,7 +10,7 @@ import java.util.Objects;
 public class TriangleBoard {
     private boolean[] pegs = new boolean[15];
     private int startingIndex;
-    private PlayMove playMove;
+    private transient PlayMove playMove;
 
     public TriangleBoard(int startingIndex) {
         this.startingIndex = startingIndex;
