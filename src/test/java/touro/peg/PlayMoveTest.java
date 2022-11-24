@@ -11,14 +11,14 @@ class PlayMoveTest {
     TriangleBoard board = new TriangleBoard(0);
 
     LegalMovesFactory factory = new LegalMovesFactory();
-    PlayMove play = new PlayMove(board, factory.legalMoves);
+    PlayMove play = new PlayMove(board);
 
     @Test
     void move_isValid() {
         //given
 
         //when
-        play.move(new Move(3,1,0));
+        play.move(new Move(3, 1, 0), factory.legalMoves);
 
         //then
         assertTrue(board.getPegs()[0]);
@@ -31,7 +31,7 @@ class PlayMoveTest {
         //given
 
         //when
-        play.move(new Move(4,1,0));
+        play.move(new Move(4, 1, 0), factory.legalMoves);
 
         //then
         assertFalse(board.getPegs()[0]);
@@ -46,12 +46,12 @@ class PlayMoveTest {
         board.setPeg(1, true);
         board.setPeg(3, false);
 
-        Move validMove = new Move(0,1,3);
-        Move invalidMove = new Move(3,1,0);
+        Move validMove = new Move(0, 1, 3);
+        Move invalidMove = new Move(3, 1, 0);
 
         //when
-        boolean valid = play.isValidMove(validMove);
-        boolean invalid = play.isValidMove(invalidMove);
+        boolean valid = play.isValidMove(validMove, factory.legalMoves);
+        boolean invalid = play.isValidMove(invalidMove, factory.legalMoves);
 
         //then
         assertTrue(valid);
@@ -61,14 +61,14 @@ class PlayMoveTest {
     @Test
     void isValidMove_legal() { //correct combination of given indices
         //given
-        Move validMove = new Move(3,1,0);
-        Move invalidMove = new Move(0,1,4);
-        Move invalidMove2 = new Move(0,1,3);
+        Move validMove = new Move(3, 1, 0);
+        Move invalidMove = new Move(0, 1, 4);
+        Move invalidMove2 = new Move(0, 1, 3);
 
         //when
-        boolean valid = play.isValidMove(validMove);
-        boolean invalid = play.isValidMove(invalidMove);
-        boolean invalid2 = play.isValidMove(invalidMove2);
+        boolean valid = play.isValidMove(validMove, factory.legalMoves);
+        boolean invalid = play.isValidMove(invalidMove, factory.legalMoves);
+        boolean invalid2 = play.isValidMove(invalidMove2, factory.legalMoves);
 
         //then
         assertTrue(valid);

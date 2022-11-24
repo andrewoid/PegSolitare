@@ -46,6 +46,7 @@ class BoardSolutionCheckerTest
         assertTrue(solutions.contains(expectedA));
         assertTrue(solutions.contains(expectedB));
         assertTrue(solutions.contains(expectedC));
+        System.out.println(solutions);
 
     }
 

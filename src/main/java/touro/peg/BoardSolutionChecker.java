@@ -20,7 +20,7 @@ public class BoardSolutionChecker
         List<TriangleBoardTree.TriangleTreeNode> leaves = tree.getLeaves();
         for (TriangleBoardTree.TriangleTreeNode node : leaves)
         {
-            if (node.getTriangleBoard().isWin() && !contains(solutions, node.getTriangleBoard()))
+            if (node.getTriangleBoard().isWin())
             {
                 solutions.add(node.getTriangleBoard());
             }
@@ -40,19 +40,5 @@ public class BoardSolutionChecker
             }
         }
         return bestSolutions;
-    }
-
-    public boolean contains(List<TriangleBoard> boards, TriangleBoard board)
-    {
-        // temporary method until recursion gets optimized
-        // so as not to store a bunch of the same leaves
-        for (TriangleBoard triangleBoard : boards)
-        {
-            if (triangleBoard.equalsBoard(board))
-            {
-                return true;
-            }
-        }
-        return false;
     }
 }
