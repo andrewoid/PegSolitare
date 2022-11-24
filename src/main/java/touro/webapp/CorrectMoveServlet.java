@@ -40,7 +40,8 @@ public class CorrectMoveServlet extends HttpServlet
         TriangleBoard board = new TriangleBoard(pegs, startingIndex);
 
         // list all possible boards from this starting board
-        TriangleBoardTree.TriangleTreeNode node = possibleBoardTrees.getAllGameBoards()[startingIndex]
+        TriangleBoardTree.TriangleTreeNode node = possibleBoardTrees
+                .getAllGameBoards()[startingIndex]
                 .getFound()
                 .get(board);
 
