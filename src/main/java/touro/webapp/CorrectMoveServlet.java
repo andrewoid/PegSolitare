@@ -16,7 +16,7 @@ public class CorrectMoveServlet extends HttpServlet {
     private final PossibleBoardTrees possibleBoardTrees;
     private final Gson gson = new Gson();
 
-    public CorrectMoveServlet(){
+    public CorrectMoveServlet() {
         possibleBoardTrees = new PossibleBoardTrees();
     }
 
