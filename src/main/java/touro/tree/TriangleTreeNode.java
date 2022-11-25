@@ -73,6 +73,21 @@ public class TriangleTreeNode {
 
     public boolean containsWin()
     {
+        if (children.size() > 0)
+        {
+            for (TriangleTreeNode child : children)
+            {
+                this.containsWin = child.containsWin();
+                if (this.containsWin)
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            return this.isWin;
+        }
         return this.containsWin;
     }
 
@@ -83,6 +98,20 @@ public class TriangleTreeNode {
 
     public boolean containsBestWin()
     {
+        if (children.size() > 0)
+        {
+            for (TriangleTreeNode child : children)
+            {
+                this.containsBestWin = child.containsBestWin();
+                if (this.containsBestWin)
+                {
+                    break;
+                }
+            }
+        } else
+        {
+            return this.isBestWin;
+        }
         return this.containsBestWin;
     }
 

@@ -40,6 +40,7 @@ public class TriangleBoardTree
 
         createTreeAndStoreLeaves(this.rootNode, board);
         checkForWins();
+        checkForBestWins();
     }
 
     public TriangleTreeNode getRootNode()
@@ -85,39 +86,14 @@ public class TriangleBoardTree
         }
     }
 
-    private void takeTwo(TriangleTreeNode node)
-    {
-        ArrayList<TriangleBoard> solutions = new ArrayList<>();
-        for (int i = 0; i < node.getChildren().size(); i++)
-        {
-            if (node.getChildren().get(i).isWin())
-            {
-                solutions.add(node.getTriangleBoard());
-            }
-        }
-        if (solutions.size() > 0)
-        {
-            node.setContainsWin(true);
-        }
-    }
-
     private void checkForWins()
     {
-        checkForWins(rootNode);
+        rootNode.containsWin();
     }
 
-    private void checkForWins(TriangleTreeNode triangleTreeNode)
+    private void checkForBestWins()
     {
-        boolean hasWinningBoard;
-        boolean hasBestWinningBoard;
-        for (TriangleTreeNode node : triangleTreeNode.getChildren())
-        {
-            checkForWins(node);
-            hasWinningBoard = triangleTreeNode.containsWin() || node.isWin();
-            hasBestWinningBoard = triangleTreeNode.containsBestWin() || node.isBestWin();
-            triangleTreeNode.setContainsWin(hasWinningBoard);
-            triangleTreeNode.setContainsBestWin(hasBestWinningBoard);
-        }
+        rootNode.containsBestWin();
     }
 
     public boolean contains(TriangleBoard board)

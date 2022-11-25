@@ -99,7 +99,11 @@ class TriangleTreeNodeTest
                         false, false, false, false, false, false, false, false};
         TriangleBoard triangleBoard = new TriangleBoard(pegs, 0);
         TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
+        System.out.println(triangleBoardTree.getFound().get(triangleBoard));
 
+
+        triangleBoard = new TriangleBoard(pegs, 1);
+        triangleBoardTree = new TriangleBoardTree(triangleBoard);
         System.out.println(triangleBoardTree.getFound().get(triangleBoard));
     }
 }
