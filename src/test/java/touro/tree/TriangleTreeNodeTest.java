@@ -6,6 +6,7 @@ import touro.peg.TriangleBoard;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TriangleTreeNodeTest
@@ -87,23 +88,63 @@ class TriangleTreeNodeTest
     }
 
     @Test
-    public void checkForWinsTest()
+    public void checkForWinsRootTest()
     {
+        // given
         TriangleBoard board = new TriangleBoard(0);
         TriangleBoardTree tree = new TriangleBoardTree(board);
-        System.out.println(tree.getRootNode());
 
+        //when
+        //then
+        assertTrue(tree.getRootNode().containsBestWin());
+        assertTrue(tree.getRootNode().containsWin());
+    }
+
+    @Test
+    public void checkForWinsParentOfLeaf()
+    {
         //given
         boolean[] pegs = new boolean[]
                 {false, true, false, true, false, false, false,
                         false, false, false, false, false, false, false, false};
         TriangleBoard triangleBoard = new TriangleBoard(pegs, 0);
         TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
-        System.out.println(triangleBoardTree.getFound().get(triangleBoard));
 
+        // when
+        //then
+        assertTrue(triangleBoardTree.getRootNode().containsBestWin());
+        assertTrue(triangleBoardTree.getRootNode().containsWin());
+    }
 
-        triangleBoard = new TriangleBoard(pegs, 1);
-        triangleBoardTree = new TriangleBoardTree(triangleBoard);
-        System.out.println(triangleBoardTree.getFound().get(triangleBoard));
+    @Test
+    public void checkForWinsNoBestWinAvailable()
+    {
+        //given
+        boolean[] pegs = new boolean[]
+                {false, true, false, true, false, false, false,
+                        false, false, false, false, false, false, false, false};
+        TriangleBoard triangleBoard = new TriangleBoard(pegs, 1);
+        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
+
+        //when
+        //then
+        assertFalse(triangleBoardTree.getFound().get(triangleBoard).containsBestWin());
+        assertTrue(triangleBoardTree.getFound().get(triangleBoard).containsWin());
+    }
+
+    @Test
+    public void checkForWinsNoWinAvailable()
+    {
+        //given
+        boolean[] pegs = new boolean[]
+                {true, false, false, false, false, false, false,
+                        false, false, false, false, false, false, false, true};
+        TriangleBoard triangleBoard = new TriangleBoard(pegs, 1);
+        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
+
+        //when
+        //then
+        assertFalse(triangleBoardTree.getFound().get(triangleBoard).containsBestWin());
+        assertFalse(triangleBoardTree.getFound().get(triangleBoard).containsWin());
     }
 }
