@@ -91,6 +91,8 @@ public class TriangleTreeNode {
         return "\n"
                 + triangleBoard
                 + "\n" + ((move == null) ? "No move" : move)
-                + "\nsize of children=" + children.size() + "\n";
+                + "\nsize of children=" + children.size()
+                + "\ncontains win: " + containsWin
+                + "\ncontains best win: " + containsBestWin;
     }
 }

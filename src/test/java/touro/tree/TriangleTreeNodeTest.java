@@ -85,4 +85,21 @@ class TriangleTreeNodeTest
                 """;
         assertTrue(solutions.contains(expected));
     }
+
+    @Test
+    public void checkForWinsTest()
+    {
+        TriangleBoard board = new TriangleBoard(0);
+        TriangleBoardTree tree = new TriangleBoardTree(board);
+        System.out.println(tree.getRootNode());
+
+        //given
+        boolean[] pegs = new boolean[]
+                {false, true, false, true, false, false, false,
+                        false, false, false, false, false, false, false, false};
+        TriangleBoard triangleBoard = new TriangleBoard(pegs, 0);
+        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
+
+        System.out.println(triangleBoardTree.getFound().get(triangleBoard));
+    }
 }
