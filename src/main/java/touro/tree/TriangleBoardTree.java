@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class TriangleBoardTree {
+public class TriangleBoardTree
+{
     /*
      * A tree is created with a given board in any state.
      * A root node is created with the given board only.
@@ -30,36 +31,8 @@ public class TriangleBoardTree {
     private TriangleTreeNode rootNode;
     private HashMap<TriangleBoard, TriangleTreeNode> found;
 
-    public class TriangleTreeNode {
-        TriangleBoard triangleBoard;
-        private Move move;
-        private List<TriangleTreeNode> children;
-
-        public TriangleTreeNode(TriangleBoard triangleBoard, Move move) {
-            this.triangleBoard = triangleBoard;
-            this.move = move;
-            this.children = new ArrayList<>();
-        }
-
-        public TriangleBoard getTriangleBoard()
-        {
-            return this.triangleBoard;
-
-        }
-        public List<TriangleTreeNode> getChildren() {
-            return children;
-        }
-
-        @Override
-        public String toString() {
-            return "\n"
-                    + triangleBoard
-                    + "\n" + ((move == null) ? "No move" : move)
-                    + "\nsize of children=" + children.size() + "\n";
-        }
-    }
-
-    public TriangleBoardTree(TriangleBoard board) {
+    public TriangleBoardTree(TriangleBoard board)
+    {
         this.rootNode = new TriangleTreeNode(board, null);
         this.leaves = new ArrayList<>();
         this.found = new HashMap<>();
@@ -68,35 +41,45 @@ public class TriangleBoardTree {
         createTreeAndStoreLeaves(this.rootNode, board);
     }
 
-    public TriangleTreeNode getRootNode() {
+    public TriangleTreeNode getRootNode()
+    {
         return rootNode;
     }
 
-    public List<TriangleTreeNode> getLeaves() {
+    public List<TriangleTreeNode> getLeaves()
+    {
         return leaves;
     }
 
-    public HashMap<TriangleBoard, TriangleTreeNode> getFound() {
+    public HashMap<TriangleBoard, TriangleTreeNode> getFound()
+    {
         return found;
     }
 
-    private void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board) {
-        for (Move legalMove : legalMoves) {
-            if (board.getPlayMove().isValidMove(legalMove, legalMoves)) {
+    private void createTreeAndStoreLeaves(TriangleTreeNode node, TriangleBoard board)
+    {
+        for (Move legalMove : legalMoves)
+        {
+            if (board.getPlayMove().isValidMove(legalMove, legalMoves))
+            {
                 TriangleBoard copyBoard = new TriangleBoard(board.getPegs(),
-                                                board.getStartingIndex());
+                        board.getStartingIndex());
                 copyBoard.getPlayMove().move(legalMove, legalMoves);
 
                 TriangleTreeNode newTriangleTreeNode = found.get(copyBoard);
-                if (newTriangleTreeNode == null) {
+                if (newTriangleTreeNode == null)
+                {
                     newTriangleTreeNode = new TriangleTreeNode(copyBoard, legalMove);
                     found.put(copyBoard, newTriangleTreeNode);
+                    newTriangleTreeNode.setIsWin(copyBoard.isWin());
+                    newTriangleTreeNode.setIsBestWin(copyBoard.isBestWin());
                     createTreeAndStoreLeaves(newTriangleTreeNode, copyBoard);
                 }
-                node.children.add(newTriangleTreeNode);
+                node.addChild(newTriangleTreeNode);
             }
         }
-        if (node.children.size() == 0) {
+        if (node.getChildren().size() == 0)
+        {
             leaves.add(node);
         }
     }

@@ -10,9 +10,6 @@ public class TriangleBoard {
     private boolean[] pegs = new boolean[15];
     private int startingIndex;
     private PlayMove playMove;
-    private boolean bestSolutionPossible;
-
-    private BoardSolutionChecker checker;
 
     public TriangleBoard(int startingIndex) {
         this.startingIndex = startingIndex;
@@ -20,8 +17,6 @@ public class TriangleBoard {
         for (int i = 0; i < pegs.length; i++) {
             pegs[i] = i != startingIndex;
         }
-        this.checker = new BoardSolutionChecker(this);
-        this.bestSolutionPossible = checker.getBestSolutions().size() != 0;
     }
 
     public TriangleBoard(boolean[] pegs, int startingIndex) {
@@ -29,7 +24,6 @@ public class TriangleBoard {
         this.playMove = new PlayMove(this);
 
         System.arraycopy(pegs, 0, this.pegs, 0, pegs.length);
-        // TODO: add a checker here without causing stack overflow error, check for best possible?
     }
 
     public boolean[] getPegs() {
@@ -55,11 +49,6 @@ public class TriangleBoard {
 
     private int intPeg(int index) {
         return pegs[index] ? 1 : 0;
-    }
-
-    public boolean isBestSolutionPossible()
-    {
-        return bestSolutionPossible;
     }
 
     public TriangleBoard triangleBoardCopy() {

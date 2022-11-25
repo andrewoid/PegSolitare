@@ -1,23 +1,32 @@
-package touro.peg;
+package touro.tree;
 
 import org.junit.jupiter.api.Test;
+import touro.peg.TriangleBoard;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class BoardSolutionCheckerTest
+class TriangleTreeNodeTest
 {
     @Test
     public void solutions()
     {
         // given
         TriangleBoard triangleBoard = new TriangleBoard(0);
-        BoardSolutionChecker checker = new BoardSolutionChecker(triangleBoard);
+        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
+        List<TriangleTreeNode> leaves = triangleBoardTree.getLeaves();
 
         // when
         ArrayList<String> solutions = new ArrayList<>();
-        checker.getSolutions().forEach(board -> solutions.add(board.toString()));
+        for (int i = 0; i < leaves.size(); i++)
+        {
+            if (leaves.get(i).isWin())
+            {
+                solutions.add(leaves.get(i).getTriangleBoard().toString());
+            }
+        }
 
         // then
         String expectedA = """
@@ -46,8 +55,6 @@ class BoardSolutionCheckerTest
         assertTrue(solutions.contains(expectedA));
         assertTrue(solutions.contains(expectedB));
         assertTrue(solutions.contains(expectedC));
-        System.out.println(solutions);
-
     }
 
     @Test
@@ -55,10 +62,18 @@ class BoardSolutionCheckerTest
     {
         // given
         TriangleBoard triangleBoard = new TriangleBoard(0);
-        BoardSolutionChecker checker = new BoardSolutionChecker(triangleBoard);
+        TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
+        List<TriangleTreeNode> leaves = triangleBoardTree.getLeaves();
 
         // when
-        TriangleBoard bestSolutions = checker.getBestSolutions().get(0);
+        ArrayList<String> solutions = new ArrayList<>();
+        for (int i = 0; i < leaves.size(); i++)
+        {
+            if (leaves.get(i).isBestWin())
+            {
+                solutions.add(leaves.get(i).getTriangleBoard().toString());
+            }
+        }
 
         // then
         String expected = """
@@ -68,6 +83,6 @@ class BoardSolutionCheckerTest
                  0 0 0 0
                 0 0 0 0 0
                 """;
-        assertEquals(expected, bestSolutions.toString());
+        assertTrue(solutions.contains(expected));
     }
 }

@@ -2,6 +2,7 @@ package touro.game;
 
 import touro.peg.TriangleBoard;
 import touro.tree.TriangleBoardTree;
+import touro.tree.TriangleTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,7 @@ public class GameStats {
     private List<TriangleBoard> calculateLosingPositions() {
         List<TriangleBoard> losingPositions = new ArrayList<>();
 
-        for (TriangleBoardTree.TriangleTreeNode node : triangleBoardTree.getLeaves()) {
+        for (TriangleTreeNode node : triangleBoardTree.getLeaves()) {
             if (!node.getTriangleBoard().isWin()) {
                 losingPositions.add(node.getTriangleBoard());
             }
@@ -43,7 +44,7 @@ public class GameStats {
     private List<TriangleBoard> calculateWinningPositions() {
         List<TriangleBoard> winningPositions = new ArrayList<>();
 
-        for (TriangleBoardTree.TriangleTreeNode node : triangleBoardTree.getLeaves()) {
+        for (TriangleTreeNode node : triangleBoardTree.getLeaves()) {
             if (node.getTriangleBoard().isWin()) {
                 winningPositions.add(node.getTriangleBoard());
             }
