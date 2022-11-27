@@ -39,8 +39,8 @@ public class TriangleBoardTree
         found.put(board, rootNode);
 
         createTreeAndStoreLeaves(this.rootNode, board);
-        checkForWins();
-        checkForBestWins();
+        rootNode.containsWin();
+        rootNode.containsBestWin();
     }
 
     public TriangleTreeNode getRootNode()
@@ -84,16 +84,6 @@ public class TriangleBoardTree
         {
             leaves.add(node);
         }
-    }
-
-    private void checkForWins()
-    {
-        rootNode.containsWin();
-    }
-
-    private void checkForBestWins()
-    {
-        rootNode.containsBestWin();
     }
 
     public boolean contains(TriangleBoard board)

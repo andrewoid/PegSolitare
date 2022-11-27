@@ -91,6 +91,11 @@ public class TriangleTreeNode {
         return this.containsWin;
     }
 
+    public boolean getContainsWin()
+    {
+        return this.containsWin;
+    }
+
     public void setContainsBestWin(boolean containsBestWin)
     {
         this.containsBestWin = containsBestWin;
@@ -115,8 +120,14 @@ public class TriangleTreeNode {
         return this.containsBestWin;
     }
 
+    public boolean getContainsBestWin()
+    {
+        return this.containsBestWin;
+    }
+
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "\n"
                 + triangleBoard
                 + "\n" + ((move == null) ? "No move" : move)
