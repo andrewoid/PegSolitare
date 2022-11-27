@@ -43,10 +43,9 @@ class TriangleBoardTreeTest {
 
         //when
         TriangleBoardTree triangleBoardTree = new TriangleBoardTree(triangleBoard);
-        List<TriangleBoardTree.TriangleTreeNode> children
+        List<TriangleTreeNode> children
                 = triangleBoardTree.getRootNode().getChildren();
 
-        //then
-        assertEquals(2, children.size());
+       assertEquals(2, children.size());
     }
 }

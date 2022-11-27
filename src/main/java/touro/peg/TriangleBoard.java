@@ -51,7 +51,6 @@ public class TriangleBoard {
         return pegs[index] ? 1 : 0;
     }
 
-
     public TriangleBoard triangleBoardCopy() {
         TriangleBoard triangleBoardCopy = new TriangleBoard(0);
         System.arraycopy(pegs, 0, triangleBoardCopy.pegs, 0, 15);
@@ -152,7 +151,8 @@ public class TriangleBoard {
                            %d %d
                           %d %d %d
                          %d %d %d %d
-                        %d %d %d %d %d""",
+                        %d %d %d %d %d
+                        """,
                 intPeg(0), intPeg(1), intPeg(2), intPeg(3),
                 intPeg(4), intPeg(5), intPeg(6), intPeg(7),
                 intPeg(8), intPeg(9), intPeg(10), intPeg(11),

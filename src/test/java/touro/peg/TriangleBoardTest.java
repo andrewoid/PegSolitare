@@ -1,12 +1,18 @@
 package touro.peg;
 
 import org.junit.jupiter.api.Test;
+import touro.tree.TriangleBoardTree;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TriangleBoardTest {
+class TriangleBoardTest
+{
     @Test
-    public void constructor() {
+    public void constructor()
+    {
         //Given
         //When
         TriangleBoard board = new TriangleBoard(0);
@@ -16,7 +22,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void equalsBoardIdentical() {
+    public void equalsBoardIdentical()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         TriangleBoard otherBoard = new TriangleBoard(0);
@@ -26,7 +33,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void equalsBoardMirror() {
+    public void equalsBoardMirror()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(1);
         TriangleBoard otherBoard = new TriangleBoard(2);
@@ -36,7 +44,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void equalsBoardRotated() {
+    public void equalsBoardRotated()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         TriangleBoard otherBoard = new TriangleBoard(14);
@@ -46,7 +55,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void equalsBoardFalse() {
+    public void equalsBoardFalse()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(1);
         TriangleBoard otherBoard = new TriangleBoard(10);
@@ -56,7 +66,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void testToString() {
+    public void testToString()
+    {
         //Given
         //When
         TriangleBoard board = new TriangleBoard(0);
@@ -66,12 +77,14 @@ class TriangleBoardTest {
                    1 1
                   1 1 1
                  1 1 1 1
-                1 1 1 1 1""";
+                1 1 1 1 1
+                """;
         assertEquals(expected, board.toString());
     }
 
     @Test
-    public void isWin() {
+    public void isWin()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         for (int i = 2; i < 15; i++)
@@ -84,7 +97,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isBestWin() {
+    public void isBestWin()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         board.setPeg(0, true);
@@ -98,7 +112,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isFalseWin() {
+    public void isFalseWin()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(0);
         for (int i = 2; i < 15; i++)
@@ -111,7 +126,8 @@ class TriangleBoardTest {
     }
 
     @Test
-    public void isFalseBestWin() {
+    public void isFalseBestWin()
+    {
         //Given
         TriangleBoard board = new TriangleBoard(1);
         board.setPeg(0, true);
@@ -123,6 +139,4 @@ class TriangleBoardTest {
         //Then
         assertFalse(board.isBestWin());
     }
-
-
 }
