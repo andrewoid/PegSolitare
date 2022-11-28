@@ -9,7 +9,7 @@ import java.util.Objects;
 public class TriangleBoard {
     private boolean[] pegs = new boolean[15];
     private int startingIndex;
-    private PlayMove playMove;
+    private transient PlayMove playMove;
 
     public TriangleBoard(int startingIndex) {
         this.startingIndex = startingIndex;
